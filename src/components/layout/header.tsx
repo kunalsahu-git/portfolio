@@ -17,7 +17,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const allNavLinks = [
-    { href: "/#home", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "/#about", label: "About" },
     { href: "/#skills", label: "Skills" },
     { href: "/#testimonials", label: "Testimonials" },
@@ -56,16 +56,25 @@ export function Header() {
       let currentSection = '';
       if (pathname === '/') {
         allNavLinks.forEach(link => {
-            if (link.href.startsWith('/#')) {
+            // Adjust the check for the home section to be more precise
+            if (link.href === '/') {
+                 const section = document.getElementById('home');
+                 if (section && window.scrollY < section.offsetHeight - 100) {
+                     currentSection = '/';
+                 }
+            } else if (link.href.startsWith('/#')) {
                 const sectionId = link.href.substring(2);
                 const section = document.getElementById(sectionId);
-                if (section && window.scrollY >= section.offsetTop - 100) {
+                if (section && window.scrollY >= section.offsetTop - 100 && window.scrollY < section.offsetTop + section.offsetHeight - 100) {
                     currentSection = link.href;
                 }
             }
         });
+      } else {
+        // For other pages, the active link is just the pathname
+        currentSection = pathname;
       }
-      setActiveLink(currentSection || pathname);
+      setActiveLink(currentSection);
     };
 
     handleScroll(); // Set initial active link
@@ -75,7 +84,6 @@ export function Header() {
 
 
   const navLinks = mainNavLinks.map(link => {
-    // If on a different page, all "projects" links should point to the projects page.
     if (pathname !== '/' && link.label === "Projects") {
         return { ...link, href: '/projects' };
     }
@@ -96,13 +104,13 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              data-active={activeLink === link.href}
+              data-active={activeLink === link.href || (link.href === '/#projects' && activeLink === '/projects')}
               className="nav-link transition-colors hover:text-foreground/80 text-foreground/70"
             >
               {link.label}
             </Link>
           ))}
-          <Button asChild>
+           <Button asChild>
             <Link href="/ai-analyst" data-active={pathname === '/ai-analyst'} className="nav-link">
               <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
               Hire Me
@@ -142,37 +150,17 @@ export function Header() {
                 </SheetTitle>
               </SheetHeader>
               <div className="mt-8 flex flex-col space-y-4">
-                {navLinks.map((link) => (
+                {allNavLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsSheetOpen(false)}
-                    data-active={activeLink === link.href}
+                    data-active={activeLink === link.href || (link.href === '/#projects' && activeLink === '/projects')}
                     className="nav-link text-lg font-medium transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>
                 ))}
-                <Button asChild size="lg" className="w-full mt-4">
-                  <Link
-                    href="/ai-analyst"
-                    onClick={() => setIsSheetOpen(false)}
-                    data-active={pathname === '/ai-analyst'} 
-                    className="nav-link"
-                  >
-                    <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
-                    Hire Me
-                  </Link>
-                </Button>
-                <Button asChild size="lg" className="w-full mt-4" variant="outline">
-                  <Link
-                    href="/#contact"
-                    onClick={() => setIsSheetOpen(false)}
-                  >
-                    <Briefcase className="mr-2 h-5 w-5" />
-                    Contact
-                  </Link>
-                </Button>
               </div>
             </SheetContent>
           </Sheet>
