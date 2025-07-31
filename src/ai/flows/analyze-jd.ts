@@ -30,7 +30,7 @@ const AnalyzeJobDescriptionOutputSchema = z.object({
   matchedSkills: z
     .array(z.string())
     .describe(
-      "A list of skills the developer has that are also mentioned in the job description."
+      "A list of skills the developer has that are also mentioned or implied in the job description."
     ),
   missingSkills: z
     .array(z.string())
@@ -57,15 +57,20 @@ const prompt = ai.definePrompt({
   name: 'analyzeJdPrompt',
   input: {schema: AnalyzeJobDescriptionInputSchema},
   output: {schema: AnalyzeJobDescriptionOutputSchema},
-  prompt: `You are an expert HR analyst and career coach. Your task is to analyze a job description (JD) and compare it against a provided list of developer skills.
+  prompt: `You are an expert HR technology analyst and career coach with deep knowledge of the software development industry. Your task is to analyze a job description (JD) and compare it against a provided list of developer skills. Your analysis must be intelligent and go beyond simple keyword matching.
 
-You must perform the following actions:
-1.  Carefully read the Job Description to identify all the required technical skills (programming languages, frameworks, libraries, tools, methodologies, etc.).
-2.  Compare the identified skills from the JD with the developer's skill list.
-3.  Calculate a "match percentage". This should represent how many of the JD's required skills are present in the developer's skill list. If the JD requires 10 skills and the developer has 7 of them, the match percentage is 70%.
-4.  List the skills the developer possesses that are mentioned in the JD ("matchedSkills").
+You must understand the relationships between technologies. For example:
+- If the developer lists "React" and "Next.js", you should recognize this as "Frontend Development", "JavaScript Frameworks", and "Web Development".
+- If the JD asks for "State Management", and the developer lists "Redux" or "Zustand", that's a match.
+- If the JD requires "Cloud Experience" and the developer lists "Firebase" or "AWS", that's a match.
+
+Perform the following actions:
+1.  Carefully read the Job Description to identify all required technical skills, including programming languages, frameworks, libraries, tools, methodologies, and broader concepts (e.g., "CI/CD", "Testing", "UI/UX Design").
+2.  Compare the identified skills from the JD with the developer's skill list, considering both direct matches and conceptual/hierarchical matches.
+3.  Calculate a "match percentage". This should represent how many of the JD's required skills (both explicit and conceptual) are present in the developer's skill list. A developer with "React" and "Tailwind CSS" should get a high match score for a "Frontend Developer" role.
+4.  List the skills the developer possesses that are relevant to the JD ("matchedSkills"). Include both direct matches and the developer's specific skills that satisfy a broader requirement (e.g., list "React" if the JD asks for a frontend framework).
 5.  List the important skills from the JD that are *not* on the developer's list ("missingSkills").
-6.  Write a concise, professional summary of the fit.
+6.  Write a concise, professional summary of the fit, highlighting how the developer's specific skills align with the role's requirements.
 
 Developer's Skills:
 {{#each developerSkills}}
