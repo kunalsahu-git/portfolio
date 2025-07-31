@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 
 const socialLinks = [
-  { icon: Github, href: "#" },
-  { icon: Twitter, href: "#" },
-  { icon: Linkedin, href: "#" },
-  { icon: Figma, href: "#" },
-  { icon: GitBranch, href: "#" },
+  { name: "GitHub", icon: Github, href: "#" },
+  { name: "Twitter", icon: Twitter, href: "#" },
+  { name: "LinkedIn", icon: Linkedin, href: "#" },
+  { name: "Figma", icon: Figma, href: "#" },
+  { name: "GitBranch", icon: GitBranch, href: "#" },
 ];
 
 export function AboutSection() {
@@ -26,9 +26,9 @@ export function AboutSection() {
               I'm a passionate front-end developer looking for a new role in an exciting company. I focus on writing accessible HTML, using modern CSS practices and writing clean JavaScript. When writing JavaScript code, I mostly use React, but I can adapt to whatever tools are required. I'm based in London, UK, but I'm happy working remotely and have experience in remote teams. When I'm not coding, you'll find me outdoors. I love being out in nature whether that's going for a walk, run or cycling. I'd love you to check out my work.
             </p>
             <div className="flex justify-center gap-4">
-              {socialLinks.map((link, index) => (
-                <Button key={index} asChild variant="outline" size="icon" className="rounded-full">
-                  <Link href={link.href}>
+              {socialLinks.map((link) => (
+                <Button key={link.name} asChild variant="outline" size="icon" className="rounded-full">
+                  <Link href={link.href} aria-label={link.name}>
                     <link.icon className="h-5 w-5" />
                   </Link>
                 </Button>
