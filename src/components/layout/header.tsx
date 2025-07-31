@@ -41,7 +41,7 @@ export function Header() {
           ))}
            <Button asChild variant="outline">
             <Link href="/ai-analyst">
-              <BrainCircuit className="mr-2 h-4 w-4" />
+              <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
               AI Analyst
             </Link>
           </Button>
@@ -89,7 +89,7 @@ export function Header() {
                 ))}
                 <Button asChild size="lg" className="w-full mt-4">
                     <Link href="/ai-analyst" onClick={() => setIsSheetOpen(false)}>
-                        <BrainCircuit className="mr-2 h-5 w-5" />
+                        <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
                         AI Analyst
                     </Link>
                 </Button>
