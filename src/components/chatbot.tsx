@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageSquare, Send, X, Bot, Loader2, Sparkles } from "lucide-react";
-import { chatbotFlow } from "@/ai/flows/chatbot";
+import { askChatbot } from "@/ai/actions";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/scroll-area";
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -27,16 +27,13 @@ export function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-        startTransition(async () => {
-            const response = await chatbotFlow({});
-            setMessages([{ role: 'model', content: response.content }]);
-            setShowSuggestions(true);
-        });
+        setMessages([{ role: 'model', content: "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience." }]);
+        setShowSuggestions(true);
     }
   }, [isOpen]);
 
@@ -53,16 +50,16 @@ export function Chatbot() {
     const newMessages: Message[] = [...messages, { role: 'user', content: messageContent }];
     setMessages(newMessages);
     setShowSuggestions(false);
+    setInput("");
 
     startTransition(async () => {
-      const response = await chatbotFlow({ history: newMessages });
+      const response = await askChatbot({ history: newMessages });
       setMessages(prev => [...prev, { role: 'model', content: response.content }]);
     });
   };
 
   const handleSend = () => {
     sendMessage(input);
-    setInput("");
   };
 
   const handleSuggestedQuestion = (question: string) => {
@@ -134,7 +131,7 @@ export function Chatbot() {
                         </div>
                     </div>
                 )}
-                 {showSuggestions && !isPending && messages.length > 0 && (
+                 {showSuggestions && !isPending && (
                     <div className="space-y-2 pt-4">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <Sparkles className="w-4 h-4 text-primary" />
