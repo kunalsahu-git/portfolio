@@ -26,7 +26,7 @@ const ChatbotOutputSchema = z.object({
 });
 export type ChatbotOutput = z.infer<typeof ChatbotOutputSchema>;
 
-export async function chatbotFlow(input: ChatbotInput): Promise<ChatbotOutput> {
+export async function chatbotFlow(input?: ChatbotInput): Promise<ChatbotOutput> {
   const history = input?.history ?? [];
 
   if (history.length === 0) {
