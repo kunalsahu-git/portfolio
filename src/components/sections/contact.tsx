@@ -60,42 +60,49 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="border-t border-border/20">
+    <section id="contact" className="border-t border-border/20 relative">
+      <div className="grid-pattern" />
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-headline text-4xl font-bold tracking-tight">
-            <span className="text-gradient">Contact</span>
+            <span className="text-gradient">Get In Touch</span>
           </h2>
+           <p className="mt-4 text-lg text-muted-foreground">
+              Have a project in mind, a question, or just want to say hi? I'd love to hear from you.
+            </p>
         </div>
 
-        <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-16 md:grid-cols-2">
-          <div>
-            <h3 className="font-headline text-3xl font-bold">Drop me a message</h3>
-            <p className="mt-4 text-muted-foreground">
-              A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track.
-            </p>
-            <div className="mt-8 space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Phone className="h-6 w-6" />
-                </div>
-                <span className="text-lg">+1 1234567890</span>
-              </div>
-              <div className="flex items-center gap-4">
-                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-2">
+         <div className="space-y-8">
+             <div className="flex items-center gap-4 p-4 rounded-lg bg-card border">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Mail className="h-6 w-6" />
                 </div>
-                <span className="text-lg">me@anurag.com</span>
+                <div>
+                    <p className="font-bold text-lg">Email</p>
+                    <a href="mailto:me@anurag.com" className="text-muted-foreground hover:text-primary transition-colors">me@anurag.com</a>
+                </div>
               </div>
-              <div className="flex items-center gap-4">
-                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <div className="flex items-center gap-4 p-4 rounded-lg bg-card border">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Phone className="h-6 w-6" />
+                </div>
+                <div>
+                    <p className="font-bold text-lg">Phone</p>
+                    <a href="tel:+11234567890" className="text-muted-foreground hover:text-primary transition-colors">+1 1234567890</a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-lg bg-card border">
+                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <MapPin className="h-6 w-6" />
                 </div>
-                <span className="text-lg">123 Street Ave, Silicon Valley, India</span>
+                 <div>
+                    <p className="font-bold text-lg">Location</p>
+                    <p className="text-muted-foreground">123 Street Ave, Silicon Valley, India</p>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="rounded-lg bg-card p-8 shadow-lg">
+         </div>
+          <div className="rounded-lg bg-card p-8 shadow-lg border">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -141,9 +148,17 @@ export function ContactSection() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full group" size="lg" disabled={isPending}>
-                  Send Message
-                  <Send className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
+                 <Button type="submit" className="w-full group" size="lg" disabled={isPending}>
+                  {isPending ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
                 </Button>
               </form>
             </Form>
