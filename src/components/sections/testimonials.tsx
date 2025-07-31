@@ -86,12 +86,12 @@ export function TestimonialsSection() {
                     ))}
                 </CarouselContent>
             </Carousel>
-             <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0">
-                <Button variant="outline" size="icon" className="rounded-full -ml-12" onClick={scrollPrev}>
+            <div className="absolute -bottom-4 right-0 flex justify-end gap-2 w-full px-0">
+                <Button variant="outline" size="icon" className="rounded-full" onClick={scrollPrev}>
                     <ArrowLeft className="h-4 w-4" />
                     <span className="sr-only">Previous slide</span>
                 </Button>
-                <Button variant="outline" size="icon" className="rounded-full -mr-12" onClick={scrollNext}>
+                <Button variant="outline" size="icon" className="rounded-full" onClick={scrollNext}>
                     <ArrowRight className="h-4 w-4" />
                     <span className="sr-only">Next slide</span>
                 </Button>
