@@ -27,14 +27,19 @@ export async function handleFormSubmit(data: FormValues) {
     await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>', // Must be a verified domain on Resend
       to: myEmail,
-      subject: `New Message from ${data.name} via Portfolio`,
+      subject: `New Portfolio Message from ${data.name}`,
       reply_to: data.email,
       html: `
-        <p>You have received a new message from your portfolio contact form.</p>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${data.message}</p>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2 style="color: #333;">New Message via Portfolio Contact Form</h2>
+          <p>You have received a new message. Here are the details:</p>
+          <div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px; background-color: #f9f9f9;">
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+            <p><strong>Message:</strong></p>
+            <p style="white-space: pre-wrap;">${data.message}</p>
+          </div>
+        </div>
       `,
     });
 
@@ -42,12 +47,19 @@ export async function handleFormSubmit(data: FormValues) {
     await resend.emails.send({
       from: 'Kunal <onboarding@resend.dev>', // Must be a verified domain on Resend
       to: data.email,
-      subject: 'Thank you for your message!',
+      subject: `Thank you for getting in touch, ${data.name}!`,
       html: `
-        <p>Hi ${data.name},</p>
-        <p>Thank you for reaching out through my portfolio. I have received your message and will get back to you as soon as possible.</p>
-        <p>Best regards,</p>
-        <p>Kunal</p>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+          <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+            <h2 style="text-align: center; color: #8a2be2;">Thanks for Reaching Out!</h2>
+            <p>Hi ${data.name},</p>
+            <p>I've received your message and appreciate you taking the time to contact me through my portfolio. I'll review your message and get back to you as soon as I can.</p>
+            <p>Best regards,</p>
+            <p><strong>Kunal</strong></p>
+            <hr style="border: none; border-top: 1px solid #eee;" />
+            <p style="text-align: center; font-size: 12px; color: #aaa;">This is an automated response. Please do not reply directly to this email.</p>
+          </div>
+        </div>
       `,
     });
 
