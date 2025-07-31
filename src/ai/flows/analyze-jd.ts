@@ -48,6 +48,16 @@ const ProjectIdeaAnalysisSchema = z.object({
   suggestedStack: z.array(z.string()).describe("A list of recommended technologies for the project."),
   yourFit: z.string().describe("An explanation of how the developer's existing skills are a great fit for building this project."),
   summary: z.string().describe("A brief summary of the proposed project and technology stack."),
+   matchedSkills: z
+    .array(z.string())
+    .describe(
+      "A list of the developer's skills that are relevant for the suggested technology stack."
+    ),
+  missingSkills: z
+    .array(z.string())
+    .describe(
+      "A list of important skills required for the project that are not in the developer's skill list."
+    ),
 });
 
 const AnalysisOutputSchema = z.union([JobDescriptionAnalysisSchema, ProjectIdeaAnalysisSchema]);
@@ -111,13 +121,17 @@ const projectIdeaPrompt = ai.definePrompt({
     name: 'projectIdeaPrompt',
     input: { schema: AnalysisInputSchema },
     output: { schema: ProjectIdeaAnalysisSchema },
-    prompt: `You are an expert technical consultant and solution architect. Your task is to analyze a project idea from a potential client and suggest a technology stack. You should also explain how the developer's existing skills make them a perfect fit for the job. You MUST set analysisType to "project".
+    prompt: `You are an expert technical consultant and solution architect. Your task is to analyze a project idea from a potential client and suggest a technology stack. You must also analyze how the developer's skills fit the project. You MUST set analysisType to "project".
 
 Perform the following actions:
 1.  Analyze the project description to understand its core requirements.
 2.  Suggest a modern and appropriate technology stack ("suggestedStack"). Recommend specific technologies from the developer's skill list where applicable.
-3.  Write a compelling summary ("yourFit") explaining how the developer's skills align perfectly with the suggested stack and project requirements.
-4.  Provide a brief, high-level summary of the project and the proposed solution.
+3.  Based on the project idea and your suggested stack, determine the key skills required to build the project.
+4.  Compare the required project skills against the developer's provided skill list.
+5.  List the skills the developer possesses that are relevant to this project ("matchedSkills").
+6.  List any important skills required for the project that the developer does not have ("missingSkills").
+7.  Write a compelling summary ("yourFit") explaining how the developer's skills align perfectly with the suggested stack and project requirements.
+8.  Provide a brief, high-level summary of the project and the proposed solution ("summary").
 
 Developer's Skills:
 {{#each developerSkills}}
