@@ -12,7 +12,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const myEmail = 'me@kunal.com'; // Replace with your actual email
+// TODO: Replace this with your actual email address to receive messages.
+const myEmail = 'your-email@example.com';
 
 export async function handleFormSubmit(data: FormValues) {
   if (!process.env.RESEND_API_KEY) {
