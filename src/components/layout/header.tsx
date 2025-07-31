@@ -100,7 +100,7 @@ export function Header() {
            <Button asChild>
             <Link href="/ai-analyst">
               <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
-              <span data-active={activeLink === '/ai-analyst'} className="nav-link">Hire Me</span>
+              Hire Me
             </Link>
           </Button>
           <Button asChild variant="outline">
