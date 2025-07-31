@@ -11,7 +11,7 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const AnalysisInputSchema = z.object({
+export const AnalysisInputSchema = z.object({
   text: z.string().describe('The full text of the job description or project idea.'),
   developerSkills: z
     .array(z.string())
@@ -20,7 +20,7 @@ const AnalysisInputSchema = z.object({
 export type AnalysisInput = z.infer<typeof AnalysisInputSchema>;
 
 const JobDescriptionAnalysisSchema = z.object({
-  analysisType: z.literal('jd'),
+  analysisType: z.string().describe('MUST be set to the literal string "jd".'),
   matchPercentage: z
     .number()
     .describe(
@@ -44,13 +44,13 @@ const JobDescriptionAnalysisSchema = z.object({
 });
 
 const ProjectIdeaAnalysisSchema = z.object({
-  analysisType: z.literal('project'),
+  analysisType: z.string().describe('MUST be set to the literal string "project".'),
   suggestedStack: z.array(z.string()).describe("A list of recommended technologies for the project."),
   yourFit: z.string().describe("An explanation of how the developer's existing skills are a great fit for building this project."),
   summary: z.string().describe("A brief summary of the proposed project and technology stack."),
 });
 
-const AnalysisOutputSchema = z.union([JobDescriptionAnalysisSchema, ProjectIdeaAnalysisSchema]);
+export const AnalysisOutputSchema = z.union([JobDescriptionAnalysisSchema, ProjectIdeaAnalysisSchema]);
 export type AnalysisOutput = z.infer<typeof AnalysisOutputSchema>;
 
 
