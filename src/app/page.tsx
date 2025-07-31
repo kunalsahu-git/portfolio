@@ -8,6 +8,11 @@ import { EducationSection } from "@/components/sections/education";
 import { CertificationsSection } from "@/components/sections/certifications";
 import { TestimonialsSection } from "@/components/sections/testimonials";
 
+// This function ensures the page is statically generated at build time.
+export async function generateStaticParams() {
+  return [];
+}
+
 export default function Home() {
   return (
     <main className="flex-1">
