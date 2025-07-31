@@ -263,7 +263,7 @@ export default function AiAnalystPage() {
                     className="min-h-[200px]"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    disabled={_isPending}
+                    disabled={isPending}
                   />
                 </div>
                 <div className="flex justify-center">
