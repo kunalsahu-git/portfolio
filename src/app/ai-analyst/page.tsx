@@ -91,6 +91,7 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
 );
 
 const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'project' }> }) => (
+  <>
     <Card>
       <CardHeader>
         <CardTitle className="text-2xl">Project Idea Analysis</CardTitle>
@@ -153,6 +154,26 @@ const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { a
         </div>
       </CardContent>
     </Card>
+     {result.fitPercentage >= 70 && (
+      <Card className="mt-8 border-primary/50 bg-primary/5 text-center">
+        <CardContent className="p-8">
+          <div className="flex justify-center mb-4">
+             <Sparkles className="h-12 w-12 text-primary pulse-glow" />
+          </div>
+          <CardTitle className="text-2xl font-headline mb-2">I'm a Great Fit for Your Project!</CardTitle>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            Based on the analysis, my skill set is a strong match for your project requirements. Let's build something amazing together.
+          </p>
+          <Button asChild size="lg">
+            <Link href="/#contact">
+              <MessageSquare className="mr-2 h-5 w-5" />
+              Let's Talk
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+    )}
+  </>
 );
 
 const AnalysisResultSkeleton = () => (
