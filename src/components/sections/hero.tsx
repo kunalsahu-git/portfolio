@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -28,7 +29,7 @@ export function HeroSection() {
               </a>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full px-8 py-6 text-lg font-bold w-full sm:w-auto">
-              <Link href="/ai-analyst">
+              <Link href="/ai-analyst" data-active={false}>
                  <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
                  Hire Me
               </Link>

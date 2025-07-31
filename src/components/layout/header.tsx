@@ -39,6 +39,33 @@ const mainNavLinks = [
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const pathname = usePathname();
+  const [activeLink, setActiveLink] = React.useState('');
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (pathname === '/') {
+        const sections = allNavLinks
+          .filter(link => link.sectionId)
+          .map(link => document.getElementById(link.sectionId as string));
+        
+        const scrollPosition = window.scrollY + 150;
+
+        for (const section of sections) {
+          if (section && scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+            setActiveLink(`/#${section.id}`);
+            break;
+          }
+        }
+      } else {
+        setActiveLink(pathname);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
 
   const navLinks = mainNavLinks.map(link => {
     if (pathname !== '/' && link.href === "/#projects") {
@@ -51,17 +78,17 @@ export function Header() {
     if (pathname === '/projects' && (linkHref === '/projects' || linkHref === '/#projects')) {
       return true;
     }
-    if (pathname.startsWith('/#') && linkHref.startsWith('/#')) {
-        return pathname === linkHref;
-    }
-    return pathname === linkHref;
+    return activeLink === linkHref;
   };
   
   const getIsActiveForSheet = (linkHref: string) => {
     if ((linkHref === '/#projects' || linkHref === '/projects') && (pathname === '/projects')) {
       return true;
     }
-    return pathname === linkHref;
+    if (linkHref === '/' && activeLink === '/#home') {
+      return true;
+    }
+    return activeLink === linkHref || pathname === linkHref;
   };
 
 
@@ -87,7 +114,7 @@ export function Header() {
                 </Link>
               ))}
               <Button asChild>
-                <Link href="/ai-analyst">
+                <Link href="/ai-analyst" data-active={pathname === '/ai-analyst'} className="nav-link">
                   <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
                   Hire Me
                 </Link>
