@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -13,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
@@ -22,9 +24,18 @@ export function Header() {
     {
       href: pathname === "/" ? "/#projects" : "/projects",
       label: "Projects",
+      isActive: pathname === '/projects',
     },
-    { href: "/#about", label: "About" },
-    { href: "/#experience", label: "Experience" },
+    { 
+      href: "/#about",
+      label: "About",
+      isActive: pathname === '/' && (typeof window !== 'undefined' && window.location.hash === '#about'),
+    },
+    { 
+      href: "/#experience",
+      label: "Experience",
+      isActive: pathname === '/' && (typeof window !== 'undefined' && window.location.hash === '#experience'),
+    },
   ];
 
   return (
@@ -41,7 +52,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-foreground/70 transition-colors hover:text-foreground"
+              className={cn("px-3 py-2 transition-colors hover:text-foreground", link.isActive ? "text-foreground" : "text-foreground/70")}
             >
               {link.label}
             </Link>
@@ -91,7 +102,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsSheetOpen(false)}
-                    className="text-lg font-medium text-foreground/80 transition-colors hover:text-foreground"
+                    className={cn("text-lg font-medium transition-colors hover:text-foreground", link.isActive ? "text-foreground" : "text-foreground/80")}
                   >
                     {link.label}
                   </Link>
