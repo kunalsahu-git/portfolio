@@ -22,7 +22,7 @@ const ChatbotInputSchema = z.object({
 export type ChatbotInput = z.infer<typeof ChatbotInputSchema>;
 
 const ChatbotOutputSchema = z.object({
-  content: z.string().describe('The chatbot\'s response.'),
+  content: z.string().describe("The chatbot's response."),
 });
 export type ChatbotOutput = z.infer<typeof ChatbotOutputSchema>;
 
@@ -49,6 +49,11 @@ Analyze the conversation history and provide a relevant and helpful response.
     prompt,
     history,
   });
+  
+  const responseText = output?.text;
+  if (!responseText) {
+    return {content: "I'm sorry, I'm having trouble responding right now. Please try again in a moment."};
+  }
 
-  return {content: output!.text!};
+  return {content: responseText};
 }
