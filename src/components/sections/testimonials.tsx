@@ -8,21 +8,21 @@ const testimonials = [
     title: "Project Manager at Google",
     image: "https://placehold.co/100x100.png",
     imageHint: "woman portrait",
-    quote: "Anurag is a proactive and detail-oriented developer. He was instrumental in launching our new feature ahead of schedule. His ability to write clean, efficient code and collaborate with the team was truly impressive. I would highly recommend him.",
+    quote: "Kunal is a proactive and detail-oriented developer. He was instrumental in launching our new feature ahead of schedule. His ability to write clean, efficient code and collaborate with the team was truly impressive. I would highly recommend him.",
   },
   {
     name: "John Smith",
     title: "Lead Engineer at Microsoft",
     image: "https://placehold.co/100x100.png",
     imageHint: "man portrait",
-    quote: "Working with Anurag was a pleasure. He has a deep understanding of modern frontend technologies and a great eye for design. He consistently delivered high-quality work and was always willing to go the extra mile to ensure the project's success.",
+    quote: "Working with Kunal was a pleasure. He has a deep understanding of modern frontend technologies and a great eye for design. He consistently delivered high-quality work and was always willing to go the extra mile to ensure the project's success.",
   },
     {
     name: "Emily White",
     title: "UX Designer at Airbnb",
     image: "https://placehold.co/100x100.png",
     imageHint: "woman portrait professional",
-    quote: "Anurag has a fantastic ability to translate complex design mockups into pixel-perfect, responsive user interfaces. His attention to detail and commitment to accessibility made our collaboration seamless and effective. He's a valuable asset to any team.",
+    quote: "Kunal has a fantastic ability to translate complex design mockups into pixel-perfect, responsive user interfaces. His attention to detail and commitment to accessibility made our collaboration seamless and effective. He's a valuable asset to any team.",
   },
 ];
 

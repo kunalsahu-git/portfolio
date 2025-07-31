@@ -17,7 +17,7 @@ const fontHeadline = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Anurag - Front-End Developer",
+  title: "Kunal - Front-End Developer",
   description: "A modern, interactive portfolio for developers.",
 };
 

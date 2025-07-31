@@ -13,7 +13,7 @@ export function HeroSection() {
        <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 text-center md:text-left">
           <h1 className="font-headline text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl">
-            Hi, I'm Anurag
+            Hi, I'm Kunal
           </h1>
           <p className="text-2xl font-semibold text-gradient">
             Front-End Developer.
@@ -38,7 +38,7 @@ export function HeroSection() {
         <div className="relative">
              <Image 
               src="https://placehold.co/800x800.png"
-              alt="Anurag"
+              alt="Kunal"
               width={800}
               height={800}
               data-ai-hint="man portrait"

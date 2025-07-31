@@ -48,14 +48,13 @@ export function Header() {
   });
 
   const getIsActive = (linkHref: string) => {
-    if (linkHref === '/projects' && pathname === '/#projects') return true;
-    if (linkHref === '/#projects' && pathname === '/projects') return true;
+    if (pathname === '/projects' && (linkHref === '/projects' || linkHref === '/#projects')) {
+      return true;
+    }
     return pathname === linkHref;
   };
   
   const getIsActiveForSheet = (linkHref: string) => {
-    // For the sheet, we want to highlight '/#projects' if we are on '/' and at the projects section,
-    // or if we are on '/projects' page.
     if ((linkHref === '/#projects' || linkHref === '/projects') && (pathname === '/projects')) {
       return true;
     }
@@ -68,7 +67,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <span className="font-bold font-headline text-lg text-gradient">
-            Anurag
+            Kunal
           </span>
         </Link>
 
@@ -117,7 +116,7 @@ export function Header() {
                     onClick={() => setIsSheetOpen(false)}
                   >
                     <span className="font-bold font-headline text-lg text-gradient">
-                      Anurag
+                      Kunal
                     </span>
                   </Link>
                 </SheetTitle>

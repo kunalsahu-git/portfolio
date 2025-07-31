@@ -80,7 +80,7 @@ export function ContactSection() {
                 </div>
                 <div>
                     <p className="font-bold text-lg">Email</p>
-                    <a href="mailto:me@anurag.com" className="text-muted-foreground hover:text-primary transition-colors">me@anurag.com</a>
+                    <a href="mailto:me@kunal.com" className="text-muted-foreground hover:text-primary transition-colors">me@kunal.com</a>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 rounded-lg bg-card border">
