@@ -36,6 +36,7 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col">
           {children}
         </div>
+        <SpeedInsights />
         <Footer />
         <Toaster />
       </body>
