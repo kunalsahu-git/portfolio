@@ -7,13 +7,13 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
 import type { ChatbotInput } from '@/lib/data';
+import { z } from 'genkit';
 
 
 const systemPrompt = `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
 Your goal is to answer questions about Kunal's skills, experience, and projects in a conversational manner.
-Keep your answers concise and engaging. Format your responses with markdown where appropriate (e.g., lists).
+Keep your answers concise and engaging. Format your responses with markdown where appropriate (e.g., list).
 
 Here's some information about Kunal:
 - Skills: React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, ShadCN UI, Git, GitHub, Figma, Adobe XD, Firebase, Node.js, Genkit.
@@ -29,14 +29,26 @@ Analyze the conversation history and provide a relevant and helpful response.
 
 
 export async function internalChatbotFlow(input: ChatbotInput) {
-    if (!input.history || input.history.length === 0) {
-        return "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience.";
-    }
+  if (!input.history || input.history.length === 0) {
+      // This case is handled on the client, but as a fallback.
+      return "Hi! I'm Kunal's AI assistant. How can I help you today?";
+  }
+  return await chatbotExecutionFlow(input);
+}
 
+
+const chatbotExecutionFlow = ai.defineFlow(
+  {
+    name: 'chatbotExecutionFlow',
+    inputSchema: z.object({ history: z.array(z.object({ role: z.enum(['user', 'model']), content: z.string() })) }),
+    outputSchema: z.string(),
+  },
+  async (input) => {
     const { output } = await ai.generate({
       history: input.history,
       system: systemPrompt,
     });
 
     return output?.text ?? "I'm sorry, I'm having trouble responding right now. Please try again in a moment.";
-}
+  }
+);
