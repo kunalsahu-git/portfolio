@@ -104,15 +104,10 @@ export function Header() {
 
   return (
     <header className="h-24 flex items-center">
-      <div
-        className={cn(
-          "fixed inset-x-0 top-4 z-50",
-          "container"
-        )}
-      >
+      <div className="w-full fixed top-0 left-0 z-50 p-4">
         <div
           className={cn(
-            "glassmorphic-nav mx-auto flex h-16 max-w-4xl items-center justify-between rounded-full border border-border/20 px-6 shadow-lg"
+            "glassmorphic-nav container mx-auto flex h-16 max-w-4xl items-center justify-between rounded-full border border-border/20 px-6 shadow-lg"
           )}
         >
           <Link href="/" className="flex items-center space-x-2">
@@ -132,7 +127,7 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Button asChild>
+             <Button asChild>
               <Link href="/ai-analyst">
                 <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
                 Hire Me
