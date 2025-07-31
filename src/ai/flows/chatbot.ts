@@ -27,8 +27,12 @@ const ChatbotOutputSchema = z.object({
 export type ChatbotOutput = z.infer<typeof ChatbotOutputSchema>;
 
 export async function chatbotFlow(input: ChatbotInput): Promise<ChatbotOutput> {
-  const {history} = input;
+  const history = input?.history || [];
 
+  if (history.length === 0) {
+    return { content: "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience." };
+  }
+  
   const systemPrompt = `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
 Your goal is to answer questions about Kunal's skills, experience, and projects in a conversational manner.
 Keep your answers concise and engaging.
