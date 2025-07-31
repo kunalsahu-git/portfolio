@@ -39,9 +39,9 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-           <Button asChild variant="outline">
+           <Button asChild variant="outline" className="group">
             <Link href="/ai-analyst">
-              <BrainCircuit className="mr-2 h-4 w-4" />
+              <BrainCircuit className="mr-2 h-4 w-4 transition-all group-hover:scale-110 group-hover:text-primary" />
               AI Analyst
             </Link>
           </Button>
