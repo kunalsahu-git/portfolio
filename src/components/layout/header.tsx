@@ -14,8 +14,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useIsClient } from "@/hooks/use-is-client";
-
 
 const allNavLinks = [
     { href: "/", label: "Home", sectionId: "home" },
@@ -41,44 +39,6 @@ const mainNavLinks = [
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const pathname = usePathname();
-  const isClient = useIsClient();
-  
-  // This state will hold the active link, but we'll only set it on the client
-  // to avoid hydration mismatches.
-  const [activeLink, setActiveLink] = React.useState(pathname);
-
-  React.useEffect(() => {
-    // This effect runs only on the client, after hydration.
-    // This is the correct place to interact with `window` or do scroll spying.
-    const handleScroll = () => {
-      let currentSection = '';
-      
-      // Determine the base path for comparison
-      const basePath = pathname === '/' ? '/' : pathname;
-      currentSection = basePath;
-
-      if (pathname === '/') {
-        allNavLinks.forEach(link => {
-            // Check for sectionId to only act on links that represent sections
-            if (link.sectionId) {
-                const section = document.getElementById(link.sectionId);
-                if (section && window.scrollY >= section.offsetTop - 150 && window.scrollY < section.offsetTop + section.offsetHeight - 150) {
-                    currentSection = link.href;
-                }
-            }
-        });
-      }
-      setActiveLink(currentSection);
-    };
-
-    // Only run this logic on the client
-    if (isClient) {
-      handleScroll(); // Set active link on initial load (client-side)
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, [pathname, isClient]); // Depend on pathname and isClient
-
 
   const navLinks = mainNavLinks.map(link => {
     if (pathname !== '/' && link.href === "/#projects") {
@@ -87,16 +47,21 @@ export function Header() {
     return link;
   });
 
-  // During server-side rendering or initial client render, we base active state only on pathname
-  // to prevent hydration errors. The useEffect will then correct it based on scroll position on the client.
   const getIsActive = (linkHref: string) => {
-    if (!isClient) {
-        // Server-side rendering logic, only checks for full page match
-        return pathname === linkHref || (pathname === '/projects' && linkHref === '/#projects');
-    }
-    // Client-side rendering logic uses the activeLink state
-    return activeLink === linkHref || (activeLink === '/projects' && linkHref === '/#projects');
+    if (linkHref === '/projects' && pathname === '/#projects') return true;
+    if (linkHref === '/#projects' && pathname === '/projects') return true;
+    return pathname === linkHref;
   };
+  
+  const getIsActiveForSheet = (linkHref: string) => {
+    // For the sheet, we want to highlight '/#projects' if we are on '/' and at the projects section,
+    // or if we are on '/projects' page.
+    if ((linkHref === '/#projects' || linkHref === '/projects') && (pathname === '/projects')) {
+      return true;
+    }
+    return pathname === linkHref;
+  };
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -163,7 +128,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsSheetOpen(false)}
-                    data-active={getIsActive(link.href)}
+                    data-active={getIsActiveForSheet(link.href)}
                     className="nav-link text-lg font-medium transition-colors hover:text-foreground"
                   >
                     {link.label}
