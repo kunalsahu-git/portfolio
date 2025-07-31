@@ -103,7 +103,7 @@ export function Header() {
 
 
   return (
-    <header className="h-24 flex items-center">
+    <header>
       <div className="w-full fixed top-0 left-0 z-50 p-4">
         <div
           className={cn(
