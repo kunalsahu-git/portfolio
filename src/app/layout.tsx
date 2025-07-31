@@ -17,7 +17,7 @@ const fontHeadline = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Devfolio - Your Developer Portfolio",
+  title: "Anurag - Front-End Developer",
   description: "A modern, interactive portfolio for developers.",
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="!scroll-smooth">
+    <html lang="en" className="!scroll-smooth dark">
       <body className={cn("font-body antialiased", fontBody.variable, fontHeadline.variable)}>
         <Header />
         <div className="flex min-h-screen flex-col">

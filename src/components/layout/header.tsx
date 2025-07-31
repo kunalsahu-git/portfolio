@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Code2 } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,46 +15,36 @@ import {
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  {
-    href: "#projects",
-    label: "Projects",
-  },
-  {
-    href: "#skills",
-    label: "Skills",
-  },
-  {
-    href: "#contact",
-    label: "Contact",
-  },
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Work" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <div className="mr-4 flex items-center">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="font-bold font-headline sm:inline-block">
-              Devfolio
-            </span>
-          </Link>
-          <nav className="hidden gap-6 text-sm md:flex">
-            {navLinks.map((link) => (
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center">
+        <nav className="hidden w-full items-center justify-center gap-6 text-sm md:flex">
+          {navLinks.map((link, index) => (
+            <React.Fragment key={link.href}>
               <Link
-                key={link.href}
                 href={link.href}
-                className="font-medium text-foreground/60 transition-colors hover:text-foreground/80"
+                className="px-3 py-2 text-foreground/70 transition-colors hover:text-foreground"
               >
                 {link.label}
               </Link>
-            ))}
-          </nav>
-        </div>
-        <div className="flex flex-1 items-center justify-end">
+              {index === 1 && (
+                <div className="relative h-full">
+                  <div className="absolute inset-0 -top-2 w-full transform-gpu rounded-b-xl border-b border-x border-border/20 bg-background/50 [clip-path:polygon(0_0,100%_0,85%_100%,15%_100%)]"></div>
+                </div>
+              )}
+            </React.Fragment>
+          ))}
+        </nav>
+        <div className="flex w-full items-center justify-end md:hidden">
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button
@@ -73,8 +63,7 @@ export function Header() {
                     className="flex items-center space-x-2"
                     onClick={() => setIsSheetOpen(false)}
                   >
-                    <Code2 className="h-6 w-6 text-primary" />
-                    <span className="font-bold font-headline">Devfolio</span>
+                    <span className="font-bold font-headline text-lg">Anurag</span>
                   </Link>
                 </SheetTitle>
               </SheetHeader>

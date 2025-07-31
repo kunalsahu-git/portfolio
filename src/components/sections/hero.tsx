@@ -1,25 +1,38 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="relative h-[calc(100vh-3.5rem)] min-h-[500px]">
-      <div className="animated-background" />
-      <div className="container relative flex h-full flex-col items-center justify-center gap-4 text-center">
-        <h1 className="font-headline text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-          Crafting Digital Experiences
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground md:text-xl">
-          Hi, I'm a passionate developer building beautiful and functional web applications. 
-          Explore my work and see how I can bring your ideas to life.
-        </p>
-        <div className="mt-4">
-          <Button asChild size="lg">
-            <Link href="#projects">
-              View My Work <ArrowDown className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+    <section id="home" className="relative pt-16 md:pt-24 lg:pt-32">
+       <div className="animated-background" />
+       <div className="container grid md:grid-cols-2 gap-12 items-center">
+        <div className="space-y-6 text-center md:text-left">
+          <h1 className="font-headline text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl">
+            Hi, I'm Anurag
+          </h1>
+          <p className="text-2xl font-semibold text-gradient">
+            Front-End Developer.
+          </p>
+          <p className="max-w-xl text-lg text-muted-foreground mx-auto md:mx-0">
+            A self-taught front-end developer with over 3 months of experience. I build responsive and user-friendly websites & apps. I have an clean style and efficient design, ensuring seamless interaction that align with both user expectations and business objectives.
+          </p>
+          <div className="mt-8">
+            <Button asChild size="lg" className="rounded-full px-8 py-6 text-lg font-bold">
+              <a href="#contact">
+                Contact
+              </a>
+            </Button>
+          </div>
+        </div>
+        <div className="relative">
+            <Image 
+              src="https://placehold.co/800x800.png"
+              alt="Anurag"
+              width={800}
+              height={800}
+              data-ai-hint="man portrait"
+              className="rounded-full object-cover aspect-square"
+            />
         </div>
       </div>
     </section>

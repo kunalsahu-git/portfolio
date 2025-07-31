@@ -1,153 +1,106 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ArrowUpRight, Github } from "lucide-react";
+import { Github, Globe, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    shortDescription: "A full-stack e-commerce solution with a custom CMS and payment gateway integration.",
-    longDescription: "Developed a robust e-commerce platform from scratch using Next.js for the frontend and Node.js with Express for the backend API. Integrated Stripe for payments and implemented a custom content management system for product updates.",
+    title: "Example Project",
+    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
     imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "online store",
-    tags: ["Next.js", "React", "Node.js", "Stripe", "Tailwind CSS"],
+    imageHint: "code editor",
     liveUrl: "#",
     repoUrl: "#",
+    twitterUrl: "#",
   },
   {
     id: 2,
-    title: "Task Management App",
-    shortDescription: "A collaborative task management tool with real-time updates and notifications.",
-    longDescription: "Built with React and Firebase, this application allows teams to manage projects, assign tasks, and track progress in real-time. Features include drag-and-drop boards, user authentication, and push notifications.",
+    title: "Example Project",
+    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
     imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "project management",
-    tags: ["React", "Firebase", "Zustand", "Framer Motion"],
+    imageHint: "team meeting",
     liveUrl: "#",
     repoUrl: "#",
+    twitterUrl: "#",
   },
   {
     id: 3,
-    title: "Portfolio Website",
-    shortDescription: "A personal portfolio to showcase projects and skills, featuring an AI skill suggestion tool.",
-    longDescription: "The very site you are on! A personal portfolio built with Next.js and Tailwind CSS. It features an AI-powered tool that suggests skills based on project descriptions, using Genkit and the Gemini model.",
+    title: "Example Project",
+    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
     imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "developer portfolio",
-    tags: ["Next.js", "GenAI", "Tailwind CSS", "Shadcn UI"],
+    imageHint: "react code",
     liveUrl: "#",
     repoUrl: "#",
+    twitterUrl: "#",
+  },
+   {
+    id: 4,
+    title: "Example Project",
+    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "robot museum",
+    liveUrl: "#",
+    repoUrl: "#",
+    twitterUrl: "#",
   },
 ];
 
 type Project = (typeof projects)[0];
 
-const ProjectCardContent = ({ project }: { project: Project }) => (
-  <>
-    <div className="mb-4 flex flex-wrap gap-2">
-      {project.tags.map((tag) => (
-        <Badge key={tag} variant="secondary">
-          {tag}
-        </Badge>
-      ))}
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
+  <div className={`grid items-center gap-12 md:grid-cols-2 ${index % 2 !== 0 ? 'md:grid-flow-col-dense' : ''}`}>
+    <div className={`relative rounded-lg overflow-hidden group ${index % 2 !== 0 ? 'md:col-start-2' : ''}`}>
+      <Image
+        src={project.imageUrl}
+        alt={project.title}
+        width={600}
+        height={400}
+        data-ai-hint={project.imageHint}
+        className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
     </div>
-    <p className="mb-6 text-muted-foreground">{project.longDescription}</p>
-    <div className="flex gap-4">
-      <Button asChild variant="default">
-        <Link href={project.liveUrl}>
-          Live Demo <ArrowUpRight className="ml-2 h-4 w-4" />
-        </Link>
-      </Button>
-      <Button asChild variant="outline">
-        <Link href={project.repoUrl}>
-          <Github className="mr-2 h-4 w-4" /> GitHub
-        </Link>
-      </Button>
-    </div>
-  </>
-);
-
-const ProjectCardDesktop = ({ project }: { project: Project }) => (
-  <Card className="group relative overflow-hidden rounded-lg transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105">
-    <Image
-      src={project.imageUrl}
-      alt={project.title}
-      width={600}
-      height={400}
-      data-ai-hint={project.imageHint}
-      className="h-60 w-full object-cover"
-    />
-    <CardHeader>
-      <h3 className="text-xl font-bold font-headline">{project.title}</h3>
-    </CardHeader>
-    <CardContent>
-      <p className="text-muted-foreground">{project.shortDescription}</p>
-      <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background via-background/80 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <ProjectCardContent project={project} />
+    <div className={`space-y-6 ${index % 2 !== 0 ? 'md:col-start-1' : ''}`}>
+       <Badge variant="outline" className="text-secondary border-secondary">Recent Project</Badge>
+      <h3 className="text-3xl font-bold font-headline">{project.title}</h3>
+      <div className="rounded-lg bg-card p-6 shadow-lg -translate-x-4">
+        <p className="text-muted-foreground">{project.description}</p>
       </div>
-    </CardContent>
-  </Card>
+      <div className="flex gap-4">
+        <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+          <Link href={project.repoUrl}><Github /></Link>
+        </Button>
+        <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+          <Link href={project.twitterUrl}><Twitter /></Link>
+        </Button>
+         <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+          <Link href={project.liveUrl}><Globe /></Link>
+        </Button>
+      </div>
+    </div>
+  </div>
 );
 
-const ProjectCardMobile = ({ project }: { project: Project }) => (
-  <Card className="overflow-hidden rounded-lg">
-    <Accordion type="single" collapsible>
-      <AccordionItem value={`item-${project.id}`} className="border-b-0">
-        <AccordionTrigger className="p-0 hover:no-underline [&[data-state=open]>div>img]:scale-105">
-          <div className="relative w-full">
-            <Image
-              src={project.imageUrl}
-              alt={project.title}
-              width={600}
-              height={400}
-              data-ai-hint={project.imageHint}
-              className="h-60 w-full object-cover transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute bottom-0 w-full p-4">
-               <h3 className="text-xl font-bold font-headline text-white">{project.title}</h3>
-            </div>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent className="p-6">
-          <ProjectCardContent project={project} />
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  </Card>
-);
 
 export function ProjectsSection() {
-  const isMobile = useIsMobile();
-
   return (
-    <section id="projects" className="bg-background">
+    <section id="projects" className="border-t border-border/20">
       <div className="container">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-            My Projects
+        <div className="mx-auto mb-16 max-w-2xl text-center">
+          <h2 className="font-headline text-4xl font-bold tracking-tight">
+            <span className="text-gradient">Recent Work</span>
           </h2>
-          <p className="mt-4 text-muted-foreground md:text-xl">
-            Here are some of the things I've built.
+          <p className="mt-4 text-muted-foreground">
+            A collection of projects I've worked on.
           </p>
         </div>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) =>
-            isMobile ? (
-              <ProjectCardMobile key={project.id} project={project} />
-            ) : (
-              <ProjectCardDesktop key={project.id} project={project} />
-            )
+        <div className="space-y-24">
+          {projects.map((project, index) =>
+            <ProjectCard key={project.id} project={project} index={index} />
           )}
         </div>
       </div>
