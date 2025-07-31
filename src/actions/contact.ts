@@ -2,6 +2,7 @@
 
 import {z} from 'zod';
 import {Resend} from 'resend';
+import { generateQuote } from '@/ai/flows/generate-quote';
 
 const formSchema = z.object({
   name: z.string().min(2, {message: 'Name must be at least 2 characters.'}),
@@ -43,6 +44,9 @@ export async function handleFormSubmit(data: FormValues) {
       `,
     });
 
+    // Generate a quote of the day for the user
+    const quoteData = await generateQuote();
+
     // Send confirmation email to the user
     await resend.emails.send({
       from: 'Kunal <onboarding@resend.dev>', // Must be a verified domain on Resend
@@ -50,13 +54,24 @@ export async function handleFormSubmit(data: FormValues) {
       subject: `Thank you for getting in touch, ${data.name}!`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+          <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #fdfdfd;">
             <h2 style="text-align: center; color: #8a2be2;">Thanks for Reaching Out!</h2>
             <p>Hi ${data.name},</p>
-            <p>I've received your message and appreciate you taking the time to contact me through my portfolio. I'll review your message and get back to you as soon as I can.</p>
+            <p>I've received your message and appreciate you taking the time to contact me. I'll review your message and get back to you as soon as I can.</p>
+            
+            <div style="margin: 30px 0; padding: 20px; border-left: 4px solid #8a2be2; background-color: #f9f0ff;">
+              <p style="font-style: italic;">"${quoteData.quote}"</p>
+              <p style="text-align: right; font-weight: bold;">- ${quoteData.author}</p>
+            </div>
+
             <p>Best regards,</p>
-            <p><strong>Kunal</strong></p>
-            <hr style="border: none; border-top: 1px solid #eee;" />
+            <p style="font-family: 'Courier New', Courier, monospace; font-size: 18px; color: #8a2be2;">
+              <strong>Kunal</strong>
+            </p>
+             <p style="font-size: 14px; color: #555;">
+              Front-End Developer
+            </p>
+            <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;" />
             <p style="text-align: center; font-size: 12px; color: #aaa;">This is an automated response. Please do not reply directly to this email.</p>
           </div>
         </div>
