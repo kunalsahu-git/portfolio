@@ -45,13 +45,18 @@ export function Header() {
   
   // This state will hold the active link, but we'll only set it on the client
   // to avoid hydration mismatches.
-  const [activeLink, setActiveLink] = React.useState('');
+  const [activeLink, setActiveLink] = React.useState(pathname);
 
   React.useEffect(() => {
     // This effect runs only on the client, after hydration.
     // This is the correct place to interact with `window` or do scroll spying.
     const handleScroll = () => {
-      let currentSection = pathname;
+      let currentSection = '';
+      
+      // Determine the base path for comparison
+      const basePath = pathname === '/' ? '/' : pathname;
+      currentSection = basePath;
+
       if (pathname === '/') {
         allNavLinks.forEach(link => {
             // Check for sectionId to only act on links that represent sections
@@ -76,7 +81,7 @@ export function Header() {
 
 
   const navLinks = mainNavLinks.map(link => {
-    if (pathname !== '/' && link.label === "Projects") {
+    if (pathname !== '/' && link.href === "/#projects") {
         return { ...link, href: '/projects' };
     }
     return link;
@@ -86,10 +91,10 @@ export function Header() {
   // to prevent hydration errors. The useEffect will then correct it based on scroll position on the client.
   const getIsActive = (linkHref: string) => {
     if (!isClient) {
-        // Server-side rendering logic
+        // Server-side rendering logic, only checks for full page match
         return pathname === linkHref || (pathname === '/projects' && linkHref === '/#projects');
     }
-    // Client-side rendering logic
+    // Client-side rendering logic uses the activeLink state
     return activeLink === linkHref || (activeLink === '/projects' && linkHref === '/#projects');
   };
 
