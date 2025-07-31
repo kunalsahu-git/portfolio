@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, FileText, Briefcase } from "lucide-react";
+import { Menu, Briefcase } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -39,12 +39,6 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <Button asChild variant="outline">
-            <Link href="/jd-analyzer">
-              <FileText className="mr-2 h-4 w-4" />
-              Analyze JD
-            </Link>
-          </Button>
           <Button asChild>
             <Link href="/#contact">
               <Briefcase className="mr-2 h-4 w-4" />
@@ -87,13 +81,7 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
-                 <Button asChild size="lg" className="w-full mt-4">
-                    <Link href="/jd-analyzer" onClick={() => setIsSheetOpen(false)}>
-                        <FileText className="mr-2 h-5 w-5" />
-                        Analyze JD
-                    </Link>
-                </Button>
-                <Button asChild size="lg" className="w-full">
+                <Button asChild size="lg" className="w-full mt-4">
                     <Link href="/#contact" onClick={() => setIsSheetOpen(false)}>
                         <Briefcase className="mr-2 h-5 w-5" />
                         Hire Me

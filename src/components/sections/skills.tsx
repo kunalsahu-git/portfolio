@@ -2,9 +2,6 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '../ui/button';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 
 const skills = [
     "React", "Next.js", "TypeScript", "JavaScript (ES6+)",
@@ -34,15 +31,6 @@ export function SkillsSection() {
                             </Badge>
                         ))}
                     </div>
-                </div>
-
-                <div className="mt-16 text-center">
-                    <Button asChild size="lg" className="rounded-full px-8 py-6 text-lg font-bold group">
-                        <Link href="/jd-analyzer">
-                            Analyze a Job Description
-                            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                    </Button>
                 </div>
             </div>
         </section>
