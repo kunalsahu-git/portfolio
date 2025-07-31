@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { Card, CardContent } from "../ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
@@ -41,7 +42,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="mx-auto mt-16 max-w-4xl">
-            <Carousel opts={{ loop: true }}>
+            <Carousel opts={{ loop: true }} className="relative">
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
                         <CarouselItem key={index}>
@@ -69,8 +70,8 @@ export function TestimonialsSection() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 md:left-[-4rem]" />
+                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 md:right-[-4rem]" />
             </Carousel>
         </div>
       </div>
