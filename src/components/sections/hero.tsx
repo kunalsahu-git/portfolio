@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { FileText } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 import Link from 'next/link';
 
 export function HeroSection() {
@@ -28,9 +28,9 @@ export function HeroSection() {
               </a>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full px-8 py-6 text-lg font-bold w-full sm:w-auto">
-              <Link href="/jd-analyzer">
-                 <FileText className="mr-2 h-5 w-5" />
-                 Analyze JD
+              <Link href="/ai-analyst">
+                 <BrainCircuit className="mr-2 h-5 w-5" />
+                 AI Analyst
               </Link>
             </Button>
           </div>

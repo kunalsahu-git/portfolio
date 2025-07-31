@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Briefcase, FileText } from "lucide-react";
+import { Menu, Briefcase, BrainCircuit } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -40,9 +40,9 @@ export function Header() {
             </Link>
           ))}
            <Button asChild variant="outline">
-            <Link href="/jd-analyzer">
-              <FileText className="mr-2 h-4 w-4" />
-              Analyze JD
+            <Link href="/ai-analyst">
+              <BrainCircuit className="mr-2 h-4 w-4" />
+              AI Analyst
             </Link>
           </Button>
           <Button asChild>
@@ -88,9 +88,9 @@ export function Header() {
                   </Link>
                 ))}
                 <Button asChild size="lg" className="w-full mt-4">
-                    <Link href="/jd-analyzer" onClick={() => setIsSheetOpen(false)}>
-                        <FileText className="mr-2 h-5 w-5" />
-                        Analyze JD
+                    <Link href="/ai-analyst" onClick={() => setIsSheetOpen(false)}>
+                        <BrainCircuit className="mr-2 h-5 w-5" />
+                        AI Analyst
                     </Link>
                 </Button>
                 <Button asChild size="lg" className="w-full mt-4">
