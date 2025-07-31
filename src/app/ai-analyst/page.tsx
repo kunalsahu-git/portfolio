@@ -7,10 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, Percent, BrainCircuit, CheckCircle, XCircle, Lightbulb } from 'lucide-react';
+import { Loader2, Percent, BrainCircuit, CheckCircle, XCircle, Lightbulb, MessageSquare, Sparkles } from 'lucide-react';
 import { analyzeInput, AnalysisOutput } from '@/ai/flows/analyze-jd';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link';
 
 const developerSkills = [
   "React", "Next.js", "TypeScript", "JavaScript (ES6+)",
@@ -19,6 +20,7 @@ const developerSkills = [
 ];
 
 const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'jd' }> }) => (
+  <>
     <Card>
       <CardHeader>
         <CardTitle className="text-2xl">Job Description Analysis</CardTitle>
@@ -66,6 +68,26 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
         </div>
       </CardContent>
     </Card>
+     {result.matchPercentage >= 70 && (
+      <Card className="mt-8 border-primary/50 bg-primary/5 text-center">
+        <CardContent className="p-8">
+          <div className="flex justify-center mb-4">
+             <Sparkles className="h-12 w-12 text-primary pulse-glow" />
+          </div>
+          <CardTitle className="text-2xl font-headline mb-2">It's a Great Fit!</CardTitle>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            Based on the analysis, my skills align strongly with this role's requirements. I'm excited by this opportunity and would love to discuss how I can contribute to your team.
+          </p>
+          <Button asChild size="lg">
+            <Link href="/#contact">
+              <MessageSquare className="mr-2 h-5 w-5" />
+              Contact Me
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+    )}
+  </>
 );
 
 const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'project' }> }) => (
@@ -185,6 +207,7 @@ export default function AiAnalystPage() {
   const handleAnalyze = () => {
     if (!text) return;
     startTransition(async () => {
+      setAnalysisResult(null);
       const result = await analyzeInput({ text, developerSkills });
       setAnalysisResult(result);
     });
