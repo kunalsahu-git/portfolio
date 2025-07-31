@@ -100,10 +100,39 @@
 
   @keyframes pulse-glow {
     0%, 100% {
-      filter: drop-shadow(0 0 3px hsl(var(--primary) / 0.4));
+      filter: drop-shadow(0 0 5px hsl(var(--primary) / 0.5));
     }
     50% {
-      filter: drop-shadow(0 0 10px hsl(var(--primary) / 1));
+      filter: drop-shadow(0 0 15px hsl(var(--primary) / 1));
+    }
+  }
+
+  /* For active navigation link underline */
+  .nav-link[data-active="true"] {
+    position: relative;
+    @apply text-gradient;
+  }
+
+  .nav-link[data-active="true"]::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, hsl(var(--secondary)), hsl(var(--primary)));
+    transform: scaleX(0);
+    transform-origin: bottom center;
+    transition: transform 0.3s ease-in-out;
+    animation: grow-underline 0.3s forwards;
+  }
+
+  @keyframes grow-underline {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
     }
   }
 }

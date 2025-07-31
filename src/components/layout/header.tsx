@@ -16,27 +16,71 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
+const allNavLinks = [
+    { href: "/#home", label: "Home" },
+    { href: "/#about", label: "About" },
+    { href: "/#skills", label: "Skills" },
+    { href: "/#testimonials", label: "Testimonials" },
+    { href: "/#experience", label: "Experience" },
+    { href: "/#projects", label: "Projects" },
+    { href: "/#education", label: "Education" },
+    { href: "/#certifications", label: "Certifications" },
+    { href: "/#contact", label: "Contact" },
+    { href: "/projects", label: "All Projects" },
+    { href: "/ai-analyst", label: "Hire Me" },
+];
+
+const mainNavLinks = [
+  {
+    href: "/#projects",
+    label: "Projects",
+  },
+  { 
+    href: "/#about",
+    label: "About",
+  },
+  { 
+    href: "/#experience",
+    label: "Experience",
+  },
+];
+
+
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
+  const [activeLink, setActiveLink] = React.useState('');
   const pathname = usePathname();
 
-  const navLinks = [
-    {
-      href: pathname === "/" ? "/#projects" : "/projects",
-      label: "Projects",
-      isActive: pathname === '/projects',
-    },
-    { 
-      href: "/#about",
-      label: "About",
-      isActive: false, // Cannot reliably determine active hash link on server
-    },
-    { 
-      href: "/#experience",
-      label: "Experience",
-      isActive: false, // Cannot reliably determine active hash link on server
-    },
-  ];
+  React.useEffect(() => {
+    const handleScroll = () => {
+      let currentSection = '';
+      if (pathname === '/') {
+        allNavLinks.forEach(link => {
+            if (link.href.startsWith('/#')) {
+                const sectionId = link.href.substring(2);
+                const section = document.getElementById(sectionId);
+                if (section && window.scrollY >= section.offsetTop - 100) {
+                    currentSection = link.href;
+                }
+            }
+        });
+      }
+      setActiveLink(currentSection || pathname);
+    };
+
+    handleScroll(); // Set initial active link
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
+
+  const navLinks = mainNavLinks.map(link => {
+    // If on a different page, all "projects" links should point to the projects page.
+    if (pathname !== '/' && link.label === "Projects") {
+        return { ...link, href: '/projects' };
+    }
+    return link;
+  });
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -47,18 +91,19 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-4 text-sm md:flex">
+        <nav className="hidden items-center gap-6 text-sm md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={cn("px-3 py-2 transition-colors hover:text-foreground", link.isActive ? "text-foreground" : "text-foreground/70")}
+              data-active={activeLink === link.href}
+              className="nav-link transition-colors hover:text-foreground/80 text-foreground/70"
             >
               {link.label}
             </Link>
           ))}
           <Button asChild>
-            <Link href="/ai-analyst">
+            <Link href="/ai-analyst" data-active={pathname === '/ai-analyst'} className="nav-link">
               <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
               Hire Me
             </Link>
@@ -102,7 +147,8 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsSheetOpen(false)}
-                    className={cn("text-lg font-medium transition-colors hover:text-foreground", link.isActive ? "text-foreground" : "text-foreground/80")}
+                    data-active={activeLink === link.href}
+                    className="nav-link text-lg font-medium transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>
@@ -111,6 +157,8 @@ export function Header() {
                   <Link
                     href="/ai-analyst"
                     onClick={() => setIsSheetOpen(false)}
+                    data-active={pathname === '/ai-analyst'} 
+                    className="nav-link"
                   >
                     <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
                     Hire Me
