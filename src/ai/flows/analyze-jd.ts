@@ -11,7 +11,7 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-export const AnalysisInputSchema = z.object({
+const AnalysisInputSchema = z.object({
   text: z.string().describe('The full text of the job description or project idea.'),
   developerSkills: z
     .array(z.string())
@@ -50,7 +50,7 @@ const ProjectIdeaAnalysisSchema = z.object({
   summary: z.string().describe("A brief summary of the proposed project and technology stack."),
 });
 
-export const AnalysisOutputSchema = z.union([JobDescriptionAnalysisSchema, ProjectIdeaAnalysisSchema]);
+const AnalysisOutputSchema = z.union([JobDescriptionAnalysisSchema, ProjectIdeaAnalysisSchema]);
 export type AnalysisOutput = z.infer<typeof AnalysisOutputSchema>;
 
 
