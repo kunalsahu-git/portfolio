@@ -24,7 +24,7 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
       <CardDescription>Here's the breakdown of how my skills match the job.</CardDescription>
     </CardHeader>
     <CardContent className="space-y-8">
-      <div className="text-center">
+      <div className="text-center p-6 rounded-lg bg-card-foreground/5">
         <p className="text-muted-foreground font-semibold">Match Percentage</p>
         <div className="flex items-center justify-center gap-4 mt-2">
           <Percent className="h-10 w-10 text-primary" />
@@ -68,58 +68,58 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
 );
 
 const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'project' }> }) => (
-  <Card>
-    <CardHeader>
-      <CardTitle className="text-2xl">Project Idea Analysis</CardTitle>
-      <CardDescription>Here is a suggested tech stack and an analysis of how my skills fit the project.</CardDescription>
-    </CardHeader>
-    <CardContent className="space-y-8">
-       <div>
-          <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><Lightbulb className="text-yellow-400" /> Suggested Tech Stack</h4>
-          <div className="flex flex-wrap gap-2">
-              {result.suggestedStack.map((tech) => (
-                <Badge key={tech} variant="secondary" className="px-3 py-1 text-base">{tech}</Badge>
-              ))}
-            </div>
-       </div>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-2xl">Project Idea Analysis</CardTitle>
+        <CardDescription>Here is a suggested tech stack and an analysis of how my skills fit the project.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-8">
         <div>
-            <h4 className="font-headline text-xl font-bold mb-4">How My Skills Fit</h4>
-            <p className="text-muted-foreground whitespace-pre-wrap">{result.yourFit}</p>
+            <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><Lightbulb className="text-yellow-400" /> Suggested Tech Stack</h4>
+            <div className="flex flex-wrap gap-2">
+                {result.suggestedStack.map((tech) => (
+                  <Badge key={tech} variant="secondary" className="px-3 py-1 text-base">{tech}</Badge>
+                ))}
+              </div>
+        </div>
+          <div>
+              <h4 className="font-headline text-xl font-bold mb-4">How My Skills Fit</h4>
+              <p className="text-muted-foreground whitespace-pre-wrap">{result.yourFit}</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><CheckCircle className="text-green-500"/> My Relevant Skills</h4>
+                {result.matchedSkills.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {result.matchedSkills.map((skill) => (
+                      <Badge key={skill} variant="secondary" className="px-3 py-1 text-base bg-green-500/10 text-green-400 border-green-500/20">{skill}</Badge>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground">No direct skill matches found.</p>
+                )}
+              </div>
+              <div>
+                <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><XCircle className="text-red-500"/> Potential Skill Gaps</h4>
+                {result.missingSkills.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {result.missingSkills.map((skill) => (
+                      <Badge key={skill} variant="destructive" className="px-3 py-1 text-base bg-red-500/10 text-red-400 border-red-500/20">{skill}</Badge>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground">No skill gaps identified!</p>
+                )}
+              </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><CheckCircle className="text-green-500"/> My Relevant Skills</h4>
-              {result.matchedSkills.length > 0 ? (
-                <div className="flex flex-wrap gap-2">
-                  {result.matchedSkills.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="px-3 py-1 text-base bg-green-500/10 text-green-400 border-green-500/20">{skill}</Badge>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-muted-foreground">No direct skill matches found.</p>
-              )}
-            </div>
-            <div>
-              <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><XCircle className="text-red-500"/> Potential Skill Gaps</h4>
-              {result.missingSkills.length > 0 ? (
-                <div className="flex flex-wrap gap-2">
-                  {result.missingSkills.map((skill) => (
-                    <Badge key={skill} variant="destructive" className="px-3 py-1 text-base bg-red-500/10 text-red-400 border-red-500/20">{skill}</Badge>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-muted-foreground">No skill gaps identified!</p>
-              )}
-            </div>
-      </div>
-
-       <div>
-            <h4 className="font-headline text-xl font-bold mb-4">Project Summary</h4>
-            <p className="text-muted-foreground whitespace-pre-wrap">{result.summary}</p>
-       </div>
-    </CardContent>
-  </Card>
+        <div>
+              <h4 className="font-headline text-xl font-bold mb-4">Project Summary</h4>
+              <p className="text-muted-foreground whitespace-pre-wrap">{result.summary}</p>
+        </div>
+      </CardContent>
+    </Card>
 );
 
 
