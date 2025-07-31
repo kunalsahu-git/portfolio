@@ -2,56 +2,14 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, Globe, Twitter } from "lucide-react";
+import { Github, Globe, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { projects } from "@/lib/data";
 
-const projects = [
-  {
-    id: 1,
-    title: "Example Project",
-    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "code editor",
-    liveUrl: "#",
-    repoUrl: "#",
-    twitterUrl: "#",
-  },
-  {
-    id: 2,
-    title: "Example Project",
-    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "team meeting",
-    liveUrl: "#",
-    repoUrl: "#",
-    twitterUrl: "#",
-  },
-  {
-    id: 3,
-    title: "Example Project",
-    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "react code",
-    liveUrl: "#",
-    repoUrl: "#",
-    twitterUrl: "#",
-  },
-   {
-    id: 4,
-    title: "Example Project",
-    description: "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "robot museum",
-    liveUrl: "#",
-    repoUrl: "#",
-    twitterUrl: "#",
-  },
-];
+const featuredProjects = projects.slice(0, 2);
 
-type Project = (typeof projects)[0];
-
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
+const ProjectCard = ({ project, index }: { project: any; index: number }) => (
   <div className={`grid items-center gap-12 md:grid-cols-2 ${index % 2 !== 0 ? 'md:grid-flow-col-dense' : ''}`}>
     <div className={`relative rounded-lg overflow-hidden group ${index % 2 !== 0 ? 'md:col-start-2' : ''}`}>
       <Image
@@ -65,21 +23,21 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
     </div>
     <div className={`space-y-6 ${index % 2 !== 0 ? 'md:col-start-1' : ''}`}>
-       <Badge variant="outline" className="text-secondary border-secondary">Recent Project</Badge>
+       <Badge variant="outline" className="text-secondary border-secondary">Featured Project</Badge>
       <h3 className="text-3xl font-bold font-headline">{project.title}</h3>
       <div className="rounded-lg bg-card p-6 shadow-lg -translate-x-4">
         <p className="text-muted-foreground">{project.description}</p>
       </div>
+       <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag: string) => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+      </div>
       <div className="flex gap-4">
-        <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-          <Link href={project.repoUrl}><Github /></Link>
-        </Button>
-        <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-          <Link href={project.twitterUrl}><Twitter /></Link>
-        </Button>
-         <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-          <Link href={project.liveUrl}><Globe /></Link>
-        </Button>
+         <Button asChild>
+            <Link href={project.liveUrl} target="_blank"><Globe className="mr-2"/>Live Demo</Link>
+         </Button>
+         <Button asChild variant="outline">
+            <Link href={project.repoUrl} target="_blank"><Github className="mr-2"/>Source Code</Link>
+         </Button>
       </div>
     </div>
   </div>
@@ -95,13 +53,21 @@ export function ProjectsSection() {
             <span className="text-gradient">Recent Work</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            A collection of projects I've worked on.
+            A collection of my featured projects.
           </p>
         </div>
         <div className="space-y-24">
-          {projects.map((project, index) =>
+          {featuredProjects.map((project, index) =>
             <ProjectCard key={project.id} project={project} index={index} />
           )}
+        </div>
+         <div className="mt-16 text-center">
+            <Button asChild size="lg" className="group">
+                <Link href="/projects">
+                    View All Projects
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+            </Button>
         </div>
       </div>
     </section>
