@@ -14,35 +14,27 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+import { useIsClient } from "@/hooks/use-is-client";
+
 
 const allNavLinks = [
-    { href: "/", label: "Home" },
-    { href: "/#about", label: "About" },
-    { href: "/#skills", label: "Skills" },
-    { href: "/#testimonials", label: "Testimonials" },
-    { href: "/#experience", label: "Experience" },
-    { href: "/#projects", label: "Projects" },
-    { href: "/#education", label: "Education" },
-    { href: "/#certifications", label: "Certifications" },
-    { href: "/#contact", label: "Contact" },
+    { href: "/", label: "Home", sectionId: "home" },
+    { href: "/#about", label: "About", sectionId: "about" },
+    { href: "/#skills", label: "Skills", sectionId: "skills" },
+    { href: "/#testimonials", label: "Testimonials", sectionId: "testimonials" },
+    { href: "/#experience", label: "Experience", sectionId: "experience" },
+    { href: "/#projects", label: "Projects", sectionId: "projects" },
+    { href: "/#education", label: "Education", sectionId: "education" },
+    { href: "/#certifications", label: "Certifications", sectionId: "certifications" },
+    { href: "/#contact", label: "Contact", sectionId: "contact" },
     { href: "/projects", label: "All Projects" },
     { href: "/ai-analyst", label: "Hire Me" },
 ];
 
 const mainNavLinks = [
-  {
-    href: "/#projects",
-    label: "Projects",
-  },
-  { 
-    href: "/#about",
-    label: "About",
-  },
-  { 
-    href: "/#experience",
-    label: "Experience",
-  },
+  { href: "/#projects", label: "Projects", sectionId: "projects" },
+  { href: "/#about", label: "About", sectionId: "about" },
+  { href: "/#experience", label: "Experience", sectionId: "experience" },
 ];
 
 
@@ -50,37 +42,32 @@ export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [activeLink, setActiveLink] = React.useState('');
   const pathname = usePathname();
+  const isClient = useIsClient();
 
   React.useEffect(() => {
+    if (!isClient) return;
+
     const handleScroll = () => {
       let currentSection = '';
       if (pathname === '/') {
         allNavLinks.forEach(link => {
-            // Adjust the check for the home section to be more precise
-            if (link.href === '/') {
-                 const section = document.getElementById('home');
-                 if (section && window.scrollY < section.offsetHeight - 100) {
-                     currentSection = '/';
-                 }
-            } else if (link.href.startsWith('/#')) {
-                const sectionId = link.href.substring(2);
-                const section = document.getElementById(sectionId);
+            if (link.sectionId) {
+                const section = document.getElementById(link.sectionId);
                 if (section && window.scrollY >= section.offsetTop - 100 && window.scrollY < section.offsetTop + section.offsetHeight - 100) {
                     currentSection = link.href;
                 }
             }
         });
       } else {
-        // For other pages, the active link is just the pathname
         currentSection = pathname;
       }
       setActiveLink(currentSection);
     };
 
-    handleScroll(); // Set initial active link
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+  }, [pathname, isClient]);
 
 
   const navLinks = mainNavLinks.map(link => {
@@ -113,7 +100,7 @@ export function Header() {
            <Button asChild>
             <Link href="/ai-analyst">
               <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
-              <span data-active={pathname === '/ai-analyst'} className="nav-link">Hire Me</span>
+              <span data-active={activeLink === '/ai-analyst'} className="nav-link">Hire Me</span>
             </Link>
           </Button>
           <Button asChild variant="outline">
