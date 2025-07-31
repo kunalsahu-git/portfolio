@@ -169,17 +169,19 @@ export default function AiAnalystPage() {
                     disabled={isPending}
                   />
                 </div>
-                <Button onClick={handleAnalyze} disabled={isPending || !text} size="lg" className="w-full">
-                  {isPending ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Analyzing...
-                    </>
-                  ) : (
-                    <>
-                      <BrainCircuit className="mr-2 h-5 w-5" /> Analyze
-                    </>
-                  )}
-                </Button>
+                <div className="flex justify-center">
+                  <Button onClick={handleAnalyze} disabled={isPending || !text}>
+                    {isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Analyzing...
+                      </>
+                    ) : (
+                      <>
+                        <BrainCircuit className="mr-2 h-5 w-5" /> Analyze
+                      </>
+                    )}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
