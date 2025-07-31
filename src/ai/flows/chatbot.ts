@@ -46,7 +46,6 @@ Analyze the conversation history and provide a relevant and helpful response.
 `;
 
   const {output} = await ai.generate({
-    model: ai.model('googleai/gemini-2.0-flash'),
     prompt,
     history,
   });
