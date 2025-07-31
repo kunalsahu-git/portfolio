@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useTransition, useRef, useEffect } from "react";
@@ -67,8 +68,7 @@ export function Chatbot() {
           <CardHeader className="flex flex-row items-center justify-between">
             <div className="flex items-center gap-3">
                <Avatar>
-                  <AvatarFallback>AI</AvatarFallback>
-                  <Bot />
+                  <AvatarFallback><Bot /></AvatarFallback>
                 </Avatar>
               <CardTitle>AI Assistant</CardTitle>
             </div>
@@ -86,8 +86,7 @@ export function Chatbot() {
                   >
                     {msg.role === 'model' && (
                        <Avatar className="w-8 h-8">
-                         <AvatarFallback>AI</AvatarFallback>
-                         <Bot />
+                         <AvatarFallback><Bot /></AvatarFallback>
                       </Avatar>
                     )}
                     <div
@@ -110,8 +109,7 @@ export function Chatbot() {
                 {isPending && (
                    <div className="flex items-start gap-3 justify-start">
                         <Avatar className="w-8 h-8">
-                            <AvatarFallback>AI</AvatarFallback>
-                            <Bot />
+                           <AvatarFallback><Bot /></AvatarFallback>
                         </Avatar>
                         <div className="rounded-lg px-4 py-2 bg-muted">
                             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
