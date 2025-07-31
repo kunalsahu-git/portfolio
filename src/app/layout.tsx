@@ -9,11 +9,13 @@ import { cn } from "@/lib/utils";
 const fontBody = Inter({ 
   subsets: ["latin"],
   variable: '--font-body',
+  display: 'swap',
 });
 
 const fontHeadline = Josefin_Sans({
   subsets: ["latin"],
   variable: '--font-headline',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
