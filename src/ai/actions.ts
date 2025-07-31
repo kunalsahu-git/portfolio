@@ -3,8 +3,8 @@
 /**
  * @fileOverview Server Actions for AI-related functionality.
  */
-
-import { internalChatbotFlow, ChatbotInputSchema, type ChatbotInput } from './flows/chatbot';
+import { internalChatbotFlow } from './flows/chatbot';
+import { ChatbotInputSchema, type ChatbotInput } from '@/lib/data';
 
 export type { ChatbotInput };
 

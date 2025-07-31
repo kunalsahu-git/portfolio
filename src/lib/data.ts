@@ -1,3 +1,5 @@
+import {z} from 'zod';
+
 export const technologies = [
   "React",
   "Next.js",
@@ -64,3 +66,14 @@ export const projects = [
     tags: ["React", "Genkit", "Firebase", "Tailwind CSS"],
   },
 ];
+
+// Chatbot Schemas
+export const MessageSchema = z.object({
+  role: z.enum(['user', 'model']),
+  content: z.string(),
+});
+
+export const ChatbotInputSchema = z.object({
+  history: z.array(MessageSchema).describe('The conversation history.'),
+});
+export type ChatbotInput = z.infer<typeof ChatbotInputSchema>;
