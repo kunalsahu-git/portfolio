@@ -22,13 +22,13 @@ export function HeroSection() {
           <p className="max-w-xl text-lg text-muted-foreground mx-auto md:mx-0">
             A self-taught front-end developer with over 3 months of experience. I build responsive and user-friendly websites & apps. I have an clean style and efficient design, ensuring seamless interaction that align with both user expectations and business objectives.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mt-8">
-            <Button asChild size="lg" className="rounded-full px-8 text-base font-bold w-full sm:w-auto">
+          <div className="flex flex-row items-center justify-center md:justify-start gap-4 mt-8">
+            <Button asChild size="lg" className="rounded-full px-8 text-base font-bold w-auto">
               <a href="#contact">
                 Contact
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full px-8 text-base font-bold w-full sm:w-auto">
+            <Button asChild size="lg" variant="outline" className="rounded-full px-8 text-base font-bold w-auto">
               <Link href="/ai-analyst" data-active={false}>
                  <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
                  Hire Me
