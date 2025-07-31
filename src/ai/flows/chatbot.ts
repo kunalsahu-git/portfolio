@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview An AI flow for a portfolio chatbot.
@@ -44,11 +43,30 @@ const chatbotExecutionFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async (input) => {
-    const { output } = await ai.generate({
-      history: input.history,
-      system: systemPrompt,
-    });
+    console.log('[chatbotExecutionFlow] Received input:', JSON.stringify(input, null, 2));
 
-    return output?.text ?? "I'm sorry, I'm having trouble responding right now. Please try again in a moment.";
+    try {
+      const result = await ai.generate({
+        history: input.history,
+        system: systemPrompt,
+      });
+
+      console.log('[chatbotExecutionFlow] Raw AI response:', JSON.stringify(result, null, 2));
+      
+      const responseText = result.output?.text;
+      
+      console.log('[chatbotExecutionFlow] Extracted response text:', responseText);
+
+      if (!responseText) {
+          console.error('[chatbotExecutionFlow] Response text is empty or undefined.');
+          return "I'm sorry, I couldn't generate a response. Please try again.";
+      }
+      
+      return responseText;
+
+    } catch (error) {
+        console.error('[chatbotExecutionFlow] An error occurred during AI generation:', error);
+        return "I'm sorry, I encountered an error. Please try again later.";
+    }
   }
 );
