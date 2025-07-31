@@ -18,7 +18,7 @@ const developerSkills = [
 ];
 
 const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'jd' }> }) => (
-  <Card className="overflow-hidden">
+  <Card>
     <CardHeader>
       <CardTitle className="text-2xl">Job Description Analysis</CardTitle>
       <CardDescription>Here's the breakdown of how my skills match the job.</CardDescription>
@@ -28,7 +28,7 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
         <p className="text-muted-foreground font-semibold">Match Percentage</p>
         <div className="flex items-center justify-center gap-4 mt-2">
           <Percent className="h-10 w-10 text-primary" />
-          <p className="text-7xl font-bold text-gradient">{result.matchPercentage}%</p>
+          <p className="text-7xl font-bold text-gradient">{result.matchPercentage}</p>
         </div>
         <Progress value={result.matchPercentage} className="mt-4 h-4" />
       </div>
@@ -68,7 +68,7 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
 );
 
 const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'project' }> }) => (
-  <Card className="overflow-hidden">
+  <Card>
     <CardHeader>
       <CardTitle className="text-2xl">Project Idea Analysis</CardTitle>
       <CardDescription>Here is a suggested tech stack and an analysis of how my skills fit the project.</CardDescription>
