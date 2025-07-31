@@ -148,7 +148,7 @@ export function ContactSection() {
                     </FormItem>
                   )}
                 />
-                 <Button type="submit" className="w-full group" disabled={isPending}>
+                 <Button type="submit" className="group" disabled={isPending}>
                   {isPending ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
