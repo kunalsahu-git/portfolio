@@ -35,14 +35,8 @@ export async function chatbotFlow(input: ChatbotInput): Promise<ChatbotOutput> {
         "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience.",
     };
   }
-
-  const response = await internalChatbotFlow(input);
-  return { content: response };
-}
-
-const chatPrompt = ai.definePrompt({
-  name: 'chatbotPrompt',
-  system: `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
+  
+  const systemPrompt = `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
 Your goal is to answer questions about Kunal's skills, experience, and projects in a conversational manner.
 Keep your answers concise and engaging. Format your responses with markdown where appropriate (e.g., lists).
 
@@ -56,24 +50,18 @@ Here's some information about Kunal:
 If you don't know the answer to something, say so politely.
 
 Analyze the conversation history and provide a relevant and helpful response.
-`,
-  input: { schema: ChatbotInputSchema },
-});
+`;
 
-const internalChatbotFlow = ai.defineFlow(
-  {
-    name: 'internalChatbotFlow',
-    inputSchema: ChatbotInputSchema,
-    outputSchema: z.string(),
-  },
-  async (input) => {
-    const { output } = await chatPrompt(input);
-    const responseText = output?.text;
-    
-    if (!responseText) {
-      return "I'm sorry, I'm having trouble responding right now. Please try again in a moment.";
-    }
+  const { output } = await ai.generate({
+    history,
+    system: systemPrompt,
+  });
 
-    return responseText;
+  const responseText = output?.text;
+  
+  if (!responseText) {
+    return { content: "I'm sorry, I'm having trouble responding right now. Please try again in a moment." };
   }
-);
+
+  return { content: responseText };
+}
