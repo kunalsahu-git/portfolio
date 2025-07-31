@@ -110,13 +110,13 @@
   /* For active navigation link underline */
   .nav-link[data-active="true"] {
     position: relative;
-    @apply text-gradient;
+    @apply text-foreground;
   }
 
   .nav-link[data-active="true"]::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -4px;
     left: 0;
     right: 0;
     height: 2px;
@@ -134,5 +134,11 @@
     to {
       transform: scaleX(1);
     }
+  }
+
+  .glassmorphic-nav {
+    background-color: hsl(var(--background) / 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 }

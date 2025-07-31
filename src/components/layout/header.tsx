@@ -51,6 +51,9 @@ export function Header() {
     if (pathname === '/projects' && (linkHref === '/projects' || linkHref === '/#projects')) {
       return true;
     }
+    if (pathname.startsWith('/#') && linkHref.startsWith('/#')) {
+        return pathname === linkHref;
+    }
     return pathname === linkHref;
   };
   
@@ -63,80 +66,82 @@ export function Header() {
 
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="font-bold font-headline text-lg text-gradient">
-            Kunal
-          </span>
-        </Link>
+    <header className="sticky top-0 z-50 w-full py-4">
+      <div className="container">
+         <div className="glassmorphic-nav mx-auto flex h-16 max-w-4xl items-center justify-between rounded-full border border-border/20 px-6 shadow-lg">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="font-bold font-headline text-lg text-gradient">
+                Kunal
+              </span>
+            </Link>
 
-        <nav className="hidden items-center gap-6 text-sm md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              data-active={getIsActive(link.href)}
-              className="nav-link transition-colors hover:text-foreground/80 text-foreground/70"
-            >
-              {link.label}
-            </Link>
-          ))}
-           <Button asChild>
-            <Link href="/ai-analyst">
-              <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
-              Hire Me
-            </Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href="/#contact">
-              <Briefcase className="mr-2 h-4 w-4" />
-              Contact
-            </Link>
-          </Button>
-        </nav>
-
-        <div className="flex items-center md:hidden">
-          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                className="px-2 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-                aria-label="Toggle Navigation Menu"
-              >
-                <Menu className="h-6 w-6" />
+            <nav className="hidden items-center gap-6 text-sm md:flex">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  data-active={getIsActive(link.href)}
+                  className="nav-link transition-colors hover:text-foreground/80 text-foreground/70"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Button asChild>
+                <Link href="/ai-analyst">
+                  <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
+                  Hire Me
+                </Link>
               </Button>
-            </SheetTrigger>
-            <SheetContent side="left">
-              <SheetHeader>
-                <SheetTitle className="text-left">
-                  <Link
-                    href="/"
-                    className="flex items-center space-x-2"
-                    onClick={() => setIsSheetOpen(false)}
+              <Button asChild variant="outline">
+                <Link href="/#contact">
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  Contact
+                </Link>
+              </Button>
+            </nav>
+
+            <div className="flex items-center md:hidden">
+              <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="px-2 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+                    aria-label="Toggle Navigation Menu"
                   >
-                    <span className="font-bold font-headline text-lg text-gradient">
-                      Kunal
-                    </span>
-                  </Link>
-                </SheetTitle>
-              </SheetHeader>
-              <div className="mt-8 flex flex-col space-y-4">
-                {allNavLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsSheetOpen(false)}
-                    data-active={getIsActiveForSheet(link.href)}
-                    className="nav-link text-lg font-medium transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <SheetHeader>
+                    <SheetTitle className="text-left">
+                      <Link
+                        href="/"
+                        className="flex items-center space-x-2"
+                        onClick={() => setIsSheetOpen(false)}
+                      >
+                        <span className="font-bold font-headline text-lg text-gradient">
+                          Kunal
+                        </span>
+                      </Link>
+                    </SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-8 flex flex-col space-y-4">
+                    {allNavLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsSheetOpen(false)}
+                        data-active={getIsActiveForSheet(link.href)}
+                        className="nav-link text-lg font-medium transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+         </div>
       </div>
     </header>
   );
