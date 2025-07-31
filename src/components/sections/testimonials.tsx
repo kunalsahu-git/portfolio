@@ -30,7 +30,7 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="border-t border-border/20 relative">
         <div className="grid-pattern" />
-      <div className="container py-16 md:py-24 lg:py-32">
+      <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-headline text-4xl font-bold tracking-tight">
             <span className="text-gradient">What Others Say</span>
