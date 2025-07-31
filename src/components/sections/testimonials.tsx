@@ -1,7 +1,12 @@
 
+"use client";
+
+import * as React from "react";
 import Image from "next/image";
 import { Card, CardContent } from "../ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "../ui/carousel";
+import { Button } from "../ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -28,6 +33,16 @@ const testimonials = [
 ];
 
 export function TestimonialsSection() {
+  const [api, setApi] = React.useState<CarouselApi>()
+ 
+  const scrollPrev = React.useCallback(() => {
+    api?.scrollPrev()
+  }, [api])
+ 
+  const scrollNext = React.useCallback(() => {
+    api?.scrollNext()
+  }, [api])
+
   return (
     <section id="testimonials" className="border-t border-border/20">
         <div className="grid-pattern" />
@@ -41,8 +56,8 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="mx-auto mt-16 max-w-4xl">
-            <Carousel opts={{ loop: true }} className="relative">
+        <div className="mx-auto mt-16 max-w-4xl relative">
+            <Carousel setApi={setApi} opts={{ loop: true }}>
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
                         <CarouselItem key={index}>
@@ -70,11 +85,17 @@ export function TestimonialsSection() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                 <div className="absolute bottom-4 right-4 flex gap-2">
-                    <CarouselPrevious className="relative top-0 left-0 -translate-y-0" />
-                    <CarouselNext className="relative top-0 right-0 -translate-y-0" />
-                </div>
             </Carousel>
+             <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0">
+                <Button variant="outline" size="icon" className="rounded-full -ml-12" onClick={scrollPrev}>
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Previous slide</span>
+                </Button>
+                <Button variant="outline" size="icon" className="rounded-full -mr-12" onClick={scrollNext}>
+                    <ArrowRight className="h-4 w-4" />
+                    <span className="sr-only">Next slide</span>
+                </Button>
+            </div>
         </div>
       </div>
     </section>
