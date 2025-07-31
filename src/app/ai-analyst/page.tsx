@@ -195,11 +195,12 @@ export default function AiAnalystPage() {
       <section className="py-16 md:py-24 lg:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
+            <Badge variant="secondary" className="mb-4 text-base py-1 px-4">Powered by AI</Badge>
             <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl">
               <span className="text-gradient">Why You Should Hire Me</span>
             </h1>
             <p className="mt-6 text-xl text-muted-foreground">
-              Paste a job description to see how my skills align, or describe a project idea to get a recommended tech stack and see how I can build it for you.
+             Let my AI assistant analyze a job description or project idea to see how my skills align.
             </p>
           </div>
 
