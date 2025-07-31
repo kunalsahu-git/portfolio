@@ -30,7 +30,7 @@ export function HeroSection() {
             <Button asChild size="lg" variant="outline" className="rounded-full px-8 py-6 text-lg font-bold w-full sm:w-auto">
               <Link href="/ai-analyst">
                  <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
-                 AI Analyst
+                 Hire Me
               </Link>
             </Button>
           </div>

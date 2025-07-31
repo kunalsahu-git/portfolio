@@ -196,7 +196,7 @@ export default function AiAnalystPage() {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="text-gradient">AI Analyst</span>
+              <span className="text-gradient">Why You Should Hire Me</span>
             </h1>
             <p className="mt-6 text-xl text-muted-foreground">
               Paste a job description to see how my skills align, or describe a project idea to get a recommended tech stack and see how I can build it for you.

@@ -46,16 +46,16 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <Button asChild variant="outline">
+          <Button asChild>
             <Link href="/ai-analyst">
               <BrainCircuit className="mr-2 h-4 w-4 pulse-glow" />
-              AI Analyst
+              Hire Me
             </Link>
           </Button>
-          <Button asChild>
+          <Button asChild variant="outline">
             <Link href="/#contact">
               <Briefcase className="mr-2 h-4 w-4" />
-              Hire Me
+              Contact
             </Link>
           </Button>
         </nav>
@@ -102,16 +102,16 @@ export function Header() {
                     onClick={() => setIsSheetOpen(false)}
                   >
                     <BrainCircuit className="mr-2 h-5 w-5 pulse-glow" />
-                    AI Analyst
+                    Hire Me
                   </Link>
                 </Button>
-                <Button asChild size="lg" className="w-full mt-4">
+                <Button asChild size="lg" className="w-full mt-4" variant="outline">
                   <Link
                     href="/#contact"
                     onClick={() => setIsSheetOpen(false)}
                   >
                     <Briefcase className="mr-2 h-5 w-5" />
-                    Hire Me
+                    Contact
                   </Link>
                 </Button>
               </div>
