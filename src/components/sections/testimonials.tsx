@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 
 const testimonials = [
   {
-    name: "Jane Doe",
+    name: "Kunal",
     title: "Project Manager at Google",
     image: "https://placehold.co/100x100.png",
     imageHint: "woman portrait",
