@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Work" },
   { href: "#contact", label: "Contact" },
 ];
@@ -36,7 +37,7 @@ export function Header() {
               >
                 {link.label}
               </Link>
-              {index === 1 && (
+              {index === 2 && (
                 <div className="relative h-full">
                   <div className="absolute inset-0 -top-2 w-full transform-gpu rounded-b-xl border-b border-x border-border/20 bg-background/50 [clip-path:polygon(0_0,100%_0,85%_100%,15%_100%)]"></div>
                 </div>
