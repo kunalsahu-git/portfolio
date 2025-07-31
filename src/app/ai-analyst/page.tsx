@@ -68,7 +68,7 @@ const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analys
         </div>
       </CardContent>
     </Card>
-     {result.matchPercentage >= 70 && (
+    {result.matchPercentage >= 70 && (
       <Card className="mt-8 border-primary/50 bg-primary/5 text-center">
         <CardContent className="p-8">
           <div className="flex justify-center mb-4">
