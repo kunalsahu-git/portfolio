@@ -18,53 +18,53 @@ const developerSkills = [
 ];
 
 const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'jd' }> }) => (
-  <Card>
-    <CardHeader>
-      <CardTitle className="text-2xl">Job Description Analysis</CardTitle>
-      <CardDescription>Here's the breakdown of how my skills match the job.</CardDescription>
-    </CardHeader>
-    <CardContent className="space-y-8">
-      <div className="text-center p-6 rounded-lg bg-card-foreground/5">
-        <p className="text-muted-foreground font-semibold">Match Percentage</p>
-        <div className="flex items-center justify-center gap-4 mt-2">
-          <Percent className="h-10 w-10 text-primary" />
-          <p className="text-7xl font-bold text-gradient">{result.matchPercentage}</p>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-2xl">Job Description Analysis</CardTitle>
+        <CardDescription>Here's the breakdown of how my skills match the job.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-8">
+        <div className="text-center p-6 rounded-lg bg-card-foreground/5">
+          <p className="text-muted-foreground font-semibold">Match Percentage</p>
+          <div className="flex items-center justify-center gap-4 mt-2">
+            <Percent className="h-10 w-10 text-primary" />
+            <p className="text-7xl font-bold text-gradient">{result.matchPercentage}</p>
+          </div>
+          <Progress value={result.matchPercentage} className="mt-4 h-4" />
         </div>
-        <Progress value={result.matchPercentage} className="mt-4 h-4" />
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><CheckCircle className="text-green-500"/> Matched Skills</h4>
-          {result.matchedSkills.length > 0 ? (
-            <div className="flex flex-wrap gap-2">
-              {result.matchedSkills.map((skill) => (
-                <Badge key={skill} variant="secondary" className="px-3 py-1 text-base bg-green-500/10 text-green-400 border-green-500/20">{skill}</Badge>
-              ))}
-            </div>
-          ) : (
-            <p className="text-muted-foreground">No direct skill matches found.</p>
-          )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><CheckCircle className="text-green-500"/> Matched Skills</h4>
+            {result.matchedSkills.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {result.matchedSkills.map((skill) => (
+                  <Badge key={skill} variant="secondary" className="px-3 py-1 text-base bg-green-500/10 text-green-400 border-green-500/20">{skill}</Badge>
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground">No direct skill matches found.</p>
+            )}
+          </div>
+          <div>
+            <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><XCircle className="text-red-500"/> Missing Skills</h4>
+            {result.missingSkills.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {result.missingSkills.map((skill) => (
+                  <Badge key={skill} variant="destructive" className="px-3 py-1 text-base bg-red-500/10 text-red-400 border-red-500/20">{skill}</Badge>
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground">No missing skills identified!</p>
+            )}
+          </div>
         </div>
         <div>
-          <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><XCircle className="text-red-500"/> Missing Skills</h4>
-          {result.missingSkills.length > 0 ? (
-            <div className="flex flex-wrap gap-2">
-              {result.missingSkills.map((skill) => (
-                <Badge key={skill} variant="destructive" className="px-3 py-1 text-base bg-red-500/10 text-red-400 border-red-500/20">{skill}</Badge>
-              ))}
-            </div>
-          ) : (
-            <p className="text-muted-foreground">No missing skills identified!</p>
-          )}
+          <h4 className="font-headline text-xl font-bold mb-4">Summary</h4>
+          <p className="text-muted-foreground whitespace-pre-wrap">{result.summary}</p>
         </div>
-      </div>
-      <div>
-        <h4 className="font-headline text-xl font-bold mb-4">Summary</h4>
-        <p className="text-muted-foreground whitespace-pre-wrap">{result.summary}</p>
-      </div>
-    </CardContent>
-  </Card>
+      </CardContent>
+    </Card>
 );
 
 const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'project' }> }) => (
@@ -74,6 +74,16 @@ const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { a
         <CardDescription>Here is a suggested tech stack and an analysis of how my skills fit the project.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
+
+      <div className="text-center p-6 rounded-lg bg-card-foreground/5">
+        <p className="text-muted-foreground font-semibold">Fit Percentage</p>
+        <div className="flex items-center justify-center gap-4 mt-2">
+          <Percent className="h-10 w-10 text-primary" />
+          <p className="text-7xl font-bold text-gradient">{result.fitPercentage}</p>
+        </div>
+        <Progress value={result.fitPercentage} className="mt-4 h-4" />
+      </div>
+
         <div>
             <h4 className="font-headline text-xl font-bold mb-4 flex items-center gap-2"><Lightbulb className="text-yellow-400" /> Suggested Tech Stack</h4>
             <div className="flex flex-wrap gap-2">

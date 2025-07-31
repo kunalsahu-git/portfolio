@@ -45,6 +45,11 @@ const JobDescriptionAnalysisSchema = z.object({
 
 const ProjectIdeaAnalysisSchema = z.object({
   analysisType: z.string().describe('MUST be set to the literal string "project".'),
+  fitPercentage: z
+    .number()
+    .describe(
+      'A percentage score (0-100) of how well the developer skills match the suggested technology stack.'
+    ),
   suggestedStack: z.array(z.string()).describe("A list of recommended technologies for the project."),
   yourFit: z.string().describe("An explanation of how the developer's existing skills are a great fit for building this project."),
   summary: z.string().describe("A brief summary of the proposed project and technology stack."),
@@ -128,10 +133,11 @@ Perform the following actions:
 2.  Suggest a modern and appropriate technology stack ("suggestedStack"). Recommend specific technologies from the developer's skill list where applicable.
 3.  Based on the project idea and your suggested stack, determine the key skills required to build the project.
 4.  Compare the required project skills against the developer's provided skill list.
-5.  List the skills the developer possesses that are relevant to this project ("matchedSkills").
-6.  List any important skills required for the project that the developer does not have ("missingSkills").
-7.  Write a compelling summary ("yourFit") explaining how the developer's skills align perfectly with the suggested stack and project requirements.
-8.  Provide a brief, high-level summary of the project and the proposed solution ("summary").
+5.  Calculate a "fitPercentage". This should represent how many of the project's required skills (based on your suggested stack) are present in the developer's skill list.
+6.  List the skills the developer possesses that are relevant to this project ("matchedSkills").
+7.  List any important skills required for the project that the developer does not have ("missingSkills").
+8.  Write a compelling summary ("yourFit") explaining how the developer's skills align perfectly with the suggested stack and project requirements.
+9.  Provide a brief, high-level summary of the project and the proposed solution ("summary").
 
 Developer's Skills:
 {{#each developerSkills}}
