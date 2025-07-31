@@ -70,8 +70,10 @@ export function TestimonialsSection() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 md:left-[-4rem]" />
-                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 md:right-[-4rem]" />
+                 <div className="absolute bottom-4 right-4 flex gap-2">
+                    <CarouselPrevious className="relative top-0 left-0 -translate-y-0" />
+                    <CarouselNext className="relative top-0 right-0 -translate-y-0" />
+                </div>
             </Carousel>
         </div>
       </div>
