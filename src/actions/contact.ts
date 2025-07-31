@@ -13,12 +13,11 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-// TODO: Replace this with your actual email address to receive messages.
-const myEmail = 'your-email@example.com';
+const myEmail = process.env.MY_EMAIL;
 
 export async function handleFormSubmit(data: FormValues) {
-  if (!process.env.RESEND_API_KEY) {
-    console.log('RESEND_API_KEY is not set. Skipping email sending.');
+  if (!process.env.RESEND_API_KEY || !myEmail) {
+    console.log('RESEND_API_KEY or MY_EMAIL is not set. Skipping email sending.');
     // Simulate a successful response for UI testing without an API key.
     return {success: true, message: 'Your message has been sent successfully!'};
   }
