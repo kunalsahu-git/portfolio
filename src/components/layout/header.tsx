@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#about", label: "About" },
 ];
 
 export function Header() {
@@ -45,7 +45,7 @@ export function Header() {
             </Link>
           </Button>
           <Button asChild>
-            <Link href="#contact">
+            <Link href="/#contact">
               <Briefcase className="mr-2 h-4 w-4" />
               Hire Me
             </Link>
@@ -93,7 +93,7 @@ export function Header() {
                     </Link>
                 </Button>
                 <Button asChild size="lg" className="w-full">
-                    <Link href="#contact" onClick={() => setIsSheetOpen(false)}>
+                    <Link href="/#contact" onClick={() => setIsSheetOpen(false)}>
                         <Briefcase className="mr-2 h-5 w-5" />
                         Hire Me
                     </Link>
