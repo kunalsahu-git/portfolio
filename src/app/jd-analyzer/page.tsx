@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Sparkles, Percent, Upload, FileText } from 'lucide-react';
 import { analyzeJobDescription, AnalyzeJobDescriptionOutput } from '@/ai/flows/analyze-jd';
 import { Progress } from '@/components/ui/progress';
+import Link from 'next/link';
 
 const developerSkills = [
   "React", "Next.js", "TypeScript", "JavaScript (ES6+)",

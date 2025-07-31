@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Briefcase } from "lucide-react";
+import { Menu, Briefcase, FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +14,9 @@ import {
 } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Projects" },
   { href: "/#about", label: "About" },
+  { href: "/#experience", label: "Experience" },
 ];
 
 export function Header() {
@@ -39,6 +39,12 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+           <Button asChild variant="outline">
+            <Link href="/jd-analyzer">
+              <FileText className="mr-2 h-4 w-4" />
+              Analyze JD
+            </Link>
+          </Button>
           <Button asChild>
             <Link href="/#contact">
               <Briefcase className="mr-2 h-4 w-4" />
@@ -81,6 +87,12 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
+                <Button asChild size="lg" className="w-full mt-4">
+                    <Link href="/jd-analyzer" onClick={() => setIsSheetOpen(false)}>
+                        <FileText className="mr-2 h-5 w-5" />
+                        Analyze JD
+                    </Link>
+                </Button>
                 <Button asChild size="lg" className="w-full mt-4">
                     <Link href="/#contact" onClick={() => setIsSheetOpen(false)}>
                         <Briefcase className="mr-2 h-5 w-5" />
