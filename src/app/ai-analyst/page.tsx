@@ -235,7 +235,7 @@ export default function AiAnalystPage() {
 
   return (
     <main className="flex-1">
-      <section className="py-16 md:py-24 lg:py-32">
+      <section className="pt-32 pb-16 md:py-24 lg:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="secondary" className="mb-4 text-base py-1 px-4">Powered by AI</Badge>

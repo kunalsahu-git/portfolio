@@ -27,7 +27,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="flex-1">
-      <section id="projects" className="py-16 md:py-24 lg:py-32">
+      <section id="projects" className="pt-32 pb-16 md:py-24 lg:py-32">
         <div className="container">
           <div className="mx-auto mb-16 max-w-2xl text-center">
             <h1 className="font-headline text-4xl font-bold tracking-tight">
