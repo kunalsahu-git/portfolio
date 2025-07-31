@@ -29,12 +29,12 @@ export function Header() {
     { 
       href: "/#about",
       label: "About",
-      isActive: pathname === '/' && (typeof window !== 'undefined' && window.location.hash === '#about'),
+      isActive: false, // Cannot reliably determine active hash link on server
     },
     { 
       href: "/#experience",
       label: "Experience",
-      isActive: pathname === '/' && (typeof window !== 'undefined' && window.location.hash === '#experience'),
+      isActive: false, // Cannot reliably determine active hash link on server
     },
   ];
 
