@@ -29,7 +29,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="border-t border-border/20 relative">
+    <section id="testimonials" className="border-t border-border/20">
         <div className="grid-pattern" />
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
