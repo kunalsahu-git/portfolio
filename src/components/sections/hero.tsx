@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative py-16 md:py-24 lg:py-32">
+    <section id="home" className="relative pt-32 pb-16 md:py-24 lg:py-32">
        <div className="animated-background" />
        <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 text-center md:text-left">
