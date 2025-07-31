@@ -26,17 +26,15 @@ const ChatbotOutputSchema = z.object({
 });
 export type ChatbotOutput = z.infer<typeof ChatbotOutputSchema>;
 
-export async function chatbotFlow(input?: ChatbotInput): Promise<ChatbotOutput> {
-  const history = input?.history ?? [];
-
-  if (history.length === 0) {
-    return {
-      content:
-        "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience.",
-    };
-  }
-  
-  const systemPrompt = `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
+// This is the robust, managed flow.
+const internalChatbotFlow = ai.defineFlow(
+  {
+    name: 'internalChatbotFlow',
+    inputSchema: ChatbotInputSchema,
+    outputSchema: z.string(),
+  },
+  async ({ history }) => {
+    const systemPrompt = `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
 Your goal is to answer questions about Kunal's skills, experience, and projects in a conversational manner.
 Keep your answers concise and engaging. Format your responses with markdown where appropriate (e.g., lists).
 
@@ -52,16 +50,28 @@ If you don't know the answer to something, say so politely.
 Analyze the conversation history and provide a relevant and helpful response.
 `;
 
-  const { output } = await ai.generate({
-    history,
-    system: systemPrompt,
-  });
+    const { output } = await ai.generate({
+      history: history!,
+      system: systemPrompt,
+    });
 
-  const responseText = output?.text;
-  
-  if (!responseText) {
-    return { content: "I'm sorry, I'm having trouble responding right now. Please try again in a moment." };
+    return output?.text ?? "I'm sorry, I'm having trouble responding right now. Please try again in a moment.";
   }
+);
+
+
+// This is the simple wrapper function that the UI will call.
+export async function chatbotFlow(input: ChatbotInput): Promise<ChatbotOutput> {
+  const history = input.history ?? [];
+
+  if (history.length === 0) {
+    return {
+      content:
+        "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience.",
+    };
+  }
+
+  const responseText = await internalChatbotFlow({ history });
 
   return { content: responseText };
 }
