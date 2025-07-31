@@ -33,13 +33,16 @@ export function ExperienceSection() {
             {experiences.map((exp, index) => (
                 <Card key={index}>
                     <CardHeader>
-                        <div className="flex items-start justify-between">
+                        <div className="flex items-start justify-between gap-4">
                             <div>
                                 <CardTitle className="text-xl">{exp.role}</CardTitle>
-                                <p className="font-semibold text-primary">{exp.company}</p>
+                                <p className="font-semibold text-primary block sm:hidden">
+                                  {exp.company}, <span className="text-muted-foreground text-sm font-normal">{exp.duration}</span>
+                                </p>
+                                <p className="font-semibold text-primary hidden sm:block">{exp.company}</p>
                             </div>
-                            <div className="text-right">
-                                <p className="text-muted-foreground text-sm">{exp.duration}</p>
+                            <div className="text-right shrink-0">
+                                <p className="text-muted-foreground text-sm hidden sm:block">{exp.duration}</p>
                                 <Briefcase className="h-8 w-8 text-primary mt-2 hidden sm:inline-block" />
                             </div>
                         </div>
