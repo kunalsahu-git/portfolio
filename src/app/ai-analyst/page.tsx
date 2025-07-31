@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Percent, BrainCircuit, CheckCircle, XCircle, Lightbulb } from 'lucide-react';
 import { analyzeInput, AnalysisOutput } from '@/ai/flows/analyze-jd';
 import { Progress } from '@/components/ui/progress';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const developerSkills = [
   "React", "Next.js", "TypeScript", "JavaScript (ES6+)",
@@ -132,6 +133,48 @@ const ProjectAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { a
     </Card>
 );
 
+const AnalysisResultSkeleton = () => (
+  <Card>
+    <CardHeader>
+      <Skeleton className="h-8 w-3/4" />
+      <Skeleton className="h-4 w-1/2" />
+    </CardHeader>
+    <CardContent className="space-y-8">
+      <div className="text-center p-6 rounded-lg bg-card-foreground/5">
+        <Skeleton className="h-6 w-1/3 mx-auto" />
+        <Skeleton className="h-20 w-40 mx-auto mt-2" />
+        <Skeleton className="h-4 w-full mt-4" />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <Skeleton className="h-6 w-1/2 mb-4" />
+          <div className="flex flex-wrap gap-2">
+            <Skeleton className="h-8 w-20" />
+            <Skeleton className="h-8 w-24" />
+            <Skeleton className="h-8 w-16" />
+          </div>
+        </div>
+        <div>
+          <Skeleton className="h-6 w-1/2 mb-4" />
+          <div className="flex flex-wrap gap-2">
+            <Skeleton className="h-8 w-28" />
+            <Skeleton className="h-8 w-20" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <Skeleton className="h-6 w-1/4 mb-4" />
+        <div className="space-y-2">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 
 export default function AiAnalystPage() {
   const [text, setText] = useState('');
@@ -197,10 +240,8 @@ export default function AiAnalystPage() {
           </div>
 
           {isPending && (
-             <div className="mx-auto mt-12 max-w-4xl text-center">
-                <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
-                <p className="mt-4 text-lg font-semibold">AI is analyzing the text...</p>
-                <p className="text-muted-foreground">This may take a moment.</p>
+             <div className="mx-auto mt-12 max-w-4xl">
+                <AnalysisResultSkeleton />
             </div>
           )}
 
