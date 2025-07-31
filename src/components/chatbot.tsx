@@ -5,29 +5,38 @@ import { useState, useTransition, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { MessageSquare, Send, X, Bot, Loader2 } from "lucide-react";
+import { MessageSquare, Send, X, Bot, Loader2, Sparkles } from "lucide-react";
 import { chatbotFlow } from "@/ai/flows/chatbot";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 
 type Message = {
   role: 'user' | 'model';
   content: string;
 };
 
+const suggestedQuestions = [
+    "Tell me about his skills",
+    "What projects has he worked on?",
+    "What's his work experience?",
+];
+
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      setMessages([
-        { role: 'model', content: "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience." }
-      ]);
+        startTransition(async () => {
+            const response = await chatbotFlow({});
+            setMessages([{ role: 'model', content: response.content }]);
+            setShowSuggestions(true);
+        });
     }
   }, [isOpen]);
 
@@ -38,17 +47,26 @@ export function Chatbot() {
     }
   }, [messages]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const sendMessage = (messageContent: string) => {
+    if (!messageContent.trim()) return;
 
-    const newMessages: Message[] = [...messages, { role: 'user', content: input }];
+    const newMessages: Message[] = [...messages, { role: 'user', content: messageContent }];
     setMessages(newMessages);
-    setInput("");
+    setShowSuggestions(false);
 
     startTransition(async () => {
       const response = await chatbotFlow({ history: newMessages });
       setMessages(prev => [...prev, { role: 'model', content: response.content }]);
     });
+  };
+
+  const handleSend = () => {
+    sendMessage(input);
+    setInput("");
+  };
+
+  const handleSuggestedQuestion = (question: string) => {
+    sendMessage(question);
   };
 
   return (
@@ -97,7 +115,7 @@ export function Chatbot() {
                           : "bg-muted"
                       )}
                     >
-                      <p className="text-sm">{msg.content}</p>
+                      <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                     </div>
                      {msg.role === 'user' && (
                        <Avatar className="w-8 h-8">
@@ -106,7 +124,7 @@ export function Chatbot() {
                     )}
                   </div>
                 ))}
-                {isPending && (
+                {isPending && messages[messages.length -1]?.role === 'user' && (
                    <div className="flex items-start gap-3 justify-start">
                         <Avatar className="w-8 h-8">
                            <AvatarFallback><Bot /></AvatarFallback>
@@ -116,6 +134,19 @@ export function Chatbot() {
                         </div>
                     </div>
                 )}
+                 {showSuggestions && !isPending && messages.length > 0 && (
+                    <div className="space-y-2 pt-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Sparkles className="w-4 h-4 text-primary" />
+                            <span>Or try one of these:</span>
+                        </div>
+                        {suggestedQuestions.map((q) => (
+                            <Button key={q} variant="outline" size="sm" className="w-full justify-start h-auto py-2" onClick={() => handleSuggestedQuestion(q)}>
+                                {q}
+                            </Button>
+                        ))}
+                    </div>
+                 )}
               </div>
             </ScrollArea>
             <div className="p-4 border-t">

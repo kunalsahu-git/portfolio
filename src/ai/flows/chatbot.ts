@@ -17,7 +17,7 @@ const MessageSchema = z.object({
 });
 
 const ChatbotInputSchema = z.object({
-  history: z.array(MessageSchema).describe('The conversation history.'),
+  history: z.array(MessageSchema).optional().describe('The conversation history.'),
 });
 export type ChatbotInput = z.infer<typeof ChatbotInputSchema>;
 
@@ -35,7 +35,7 @@ export async function chatbotFlow(input: ChatbotInput): Promise<ChatbotOutput> {
   
   const systemPrompt = `You are a friendly and helpful AI assistant for Kunal's developer portfolio.
 Your goal is to answer questions about Kunal's skills, experience, and projects in a conversational manner.
-Keep your answers concise and engaging.
+Keep your answers concise and engaging. Format your responses with markdown where appropriate (e.g., lists).
 
 Here's some information about Kunal:
 - Skills: React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, ShadCN UI, Git, GitHub, Figma, Adobe XD, Firebase, Node.js, Genkit.
