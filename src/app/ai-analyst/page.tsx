@@ -240,7 +240,7 @@ export default function AiAnalystPage() {
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="secondary" className="mb-4 text-base py-1 px-4">Powered by AI</Badge>
             <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="text-gradient">Why You Should Hire Me</span>
+              <span className="text-gradient">AI Analyst</span>
             </h1>
             <p className="mt-6 text-xl text-muted-foreground">
              Let my AI assistant analyze a job description or project idea to see how my skills align.
@@ -263,7 +263,7 @@ export default function AiAnalystPage() {
                     className="min-h-[200px]"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    disabled={isPending}
+                    disabled={_isPending}
                   />
                 </div>
                 <div className="flex justify-center">
