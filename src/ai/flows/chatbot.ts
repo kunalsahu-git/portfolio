@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI flow for a portfolio chatbot.
@@ -28,10 +29,6 @@ Analyze the conversation history and provide a relevant and helpful response.
 
 
 export async function internalChatbotFlow(input: ChatbotInput) {
-  if (!input.history || input.history.length === 0) {
-      // This case is handled on the client, but as a fallback.
-      return "Hi! I'm Kunal's AI assistant. How can I help you today?";
-  }
   return await chatbotExecutionFlow(input);
 }
 
@@ -43,22 +40,15 @@ const chatbotExecutionFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async (input) => {
-    console.log('[chatbotExecutionFlow] Received input:', JSON.stringify(input, null, 2));
-
     try {
       const result = await ai.generate({
         history: input.history,
         system: systemPrompt,
       });
 
-      console.log('[chatbotExecutionFlow] Raw AI response:', JSON.stringify(result, null, 2));
-      
       const responseText = result.output?.text;
-      
-      console.log('[chatbotExecutionFlow] Extracted response text:', responseText);
 
       if (!responseText) {
-          console.error('[chatbotExecutionFlow] Response text is empty or undefined.');
           return "I'm sorry, I couldn't generate a response. Please try again.";
       }
       
