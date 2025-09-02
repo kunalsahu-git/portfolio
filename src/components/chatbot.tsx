@@ -46,7 +46,7 @@ export function Chatbot() {
     }
   }, [messages]);
 
-  const sendMessage = (messageContent: string) => {
+    const sendMessage = (messageContent: string) => {
     if (!messageContent.trim()) return;
 
     const newMessages: Message[] = [...messages, { role: 'user', content: messageContent }];
@@ -75,7 +75,7 @@ export function Chatbot() {
           size="icon"
           className="rounded-full w-16 h-16 shadow-lg"
           onClick={() => setIsOpen(!isOpen)} 
-          aria-label={isOpen ? "Close chatbot" : "Open chatbot"} >
+          aria-label={isOpen ? "Close chatbot" : "Open chatbot" } >
           {isOpen ? <X className="h-8 w-8" /> : <MessageSquare className="h-8 w-8" />}
         </Button>
       </div>
@@ -157,7 +157,7 @@ export function Chatbot() {
                   placeholder="Type a message..."
                   disabled={isPending}
                 />
-                <Button onClick={handleSend} disabled={isPending || !input.trim()} size="icon" aria-label="Send message">
+                <Button onClick={handleSend} disabled={isPending || !input.trim()} size="icon" aria-label="Send messages">
                   <Send className="h-5 w-5" />
                 </Button>
               </div>
