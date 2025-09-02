@@ -75,7 +75,7 @@ export function Chatbot() {
           size="icon"
           className="rounded-full w-16 h-16 shadow-lg"
           onClick={() => setIsOpen(!isOpen)} 
-          aria-label={isOpen ? "Close chatbot" : "Open chatbot"} >
+          aria-label={isOpen ? "Close chatbot" : "Open chatbot" } >
           {isOpen ? <X className="h-8 w-8" /> : <MessageSquare className="h-8 w-8" />}
         </Button>
       </div>
