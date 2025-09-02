@@ -157,7 +157,7 @@ export function Chatbot() {
                   placeholder="Type a message..."
                   disabled={isPending}
                 />
-                <Button onClick={handleSend} disabled={isPending || !input.trim()} size="icon" aria-label="Send messages">
+                <Button onClick={handleSend} disabled={isPending || !input.trim()} size="icon" aria-label="Send message">
                   <Send className="h-5 w-5" />
                 </Button>
               </div>
