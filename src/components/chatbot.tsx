@@ -32,8 +32,10 @@ export function Chatbot() {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
+      startTransition(() => {
         setMessages([{ role: 'model', content: "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience." }]);
         setShowSuggestions(true);
+      });
     }
   }, [isOpen]);
 
@@ -73,7 +75,6 @@ export function Chatbot() {
           size="icon"
           className="rounded-full w-16 h-16 shadow-lg"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Close chatbot" : "Open chatbot"}
         >
           {isOpen ? <X className="h-8 w-8" /> : <MessageSquare className="h-8 w-8" />}
         </Button>
