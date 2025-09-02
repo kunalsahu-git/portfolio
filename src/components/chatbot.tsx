@@ -73,6 +73,7 @@ export function Chatbot() {
           size="icon"
           className="rounded-full w-16 h-16 shadow-lg"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close chatbot" : "Open chatbot"}
         >
           {isOpen ? <X className="h-8 w-8" /> : <MessageSquare className="h-8 w-8" />}
         </Button>
@@ -155,7 +156,7 @@ export function Chatbot() {
                   placeholder="Type a message..."
                   disabled={isPending}
                 />
-                <Button onClick={handleSend} disabled={isPending || !input.trim()} size="icon">
+                <Button onClick={handleSend} disabled={isPending || !input.trim()} size="icon" aria-label="Send message">
                   <Send className="h-5 w-5" />
                 </Button>
               </div>
