@@ -23,6 +23,9 @@ const fontHeadline = Josefin_Sans({
 export const metadata: Metadata = {
   title: "Kunal - Front-End Developer",
   description: "A modern, interactive portfolio for developers.",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
