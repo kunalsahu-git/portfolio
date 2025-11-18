@@ -4,18 +4,32 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 const experiences = [
     {
-        role: "Frontend Developer Intern",
-        company: "Google",
-        duration: "May 2023 - Aug 2023",
-        description: "Worked on the Google Search team to improve the user interface for search results. Developed new features using React and TypeScript, and contributed to the internal component library. Collaborated with designers and product managers to deliver high-quality user experiences.",
-        skills: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Firebase"]
+        role: "Software Developer",
+        company: "One Origin",
+        duration: "Feb 2024 - Present",
+        description: "Architected custom migrations, custom Drupal modules and seamlessly integrated modern React components to establish a high-performance decoupled architecture, significantly enhancing website scalability and user engagement. Spearheaded and executed performance optimization initiatives (e.g., caching, asset bundling) that resulted in a measurable improvement (e.g., 20% reduction) in load times, earning client appreciation for significantly enhancing site speed, reliability, and user experience.",
+        skills: ["Drupal", "React", "JavaScript", "PHP", "Performance Optimization", "Caching", "Asset Bundling"]
     },
     {
-        role: "Software Engineer Intern",
-        company: "Microsoft",
-        duration: "May 2022 - Aug 2022",
-        description: "Developed and maintained features for the Microsoft Azure portal. Worked with a team of engineers to build and deploy scalable web applications. Gained experience with C#, .NET, and cloud technologies.",
-        skills: ["C#", ".NET", "Azure", "TypeScript", "React"]
+        role: "Software Development Engineer",
+        company: "Valuebound",
+        duration: "Mar 2022 - Feb 2024",
+        description: "Built and maintained Drupal-based web solutions, enhancing functionality and user experience. Designed efficient migration strategies and implemented API integrations.",
+        skills: ["Drupal", "PHP", "API Integration", "MySQL"]
+    },
+    {
+        role: "UI/UX Designer & Developer",
+        company: "IFIM College",
+        duration: "Oct 2021 - Feb 2022",
+        description: "Designed and developed intuitive, responsive interfaces using modern web technologies, resulting in improved user satisfaction and engagement metrics.",
+        skills: ["UI/UX Design", "Figma", "HTML", "CSS", "JavaScript"]
+    },
+    {
+        role: "Chief Technology Officer - Kanyathon",
+        company: "IFIM B-School",
+        duration: "Jan 2021 - Mar 2021",
+        description: "Led cross-functional teams to deliver tech-driven solutions for a large-scale event, enhancing operational efficiency and audience reach.",
+        skills: ["Leadership", "Project Management", "Web Development"]
     }
 ]
 

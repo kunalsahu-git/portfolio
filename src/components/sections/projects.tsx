@@ -12,14 +12,24 @@ const featuredProjects = projects.slice(0, 2);
 const ProjectCard = ({ project, index }: { project: any; index: number }) => (
   <div className={`grid items-center gap-12 md:grid-cols-2 ${index % 2 !== 0 ? 'md:grid-flow-col-dense' : ''}`}>
     <div className={`relative rounded-lg overflow-hidden group ${index % 2 !== 0 ? 'md:col-start-2' : ''}`}>
-      <Image
-        src={project.imageUrl}
-        alt={project.title}
-        width={600}
-        height={400}
-        data-ai-hint={project.imageHint}
-        className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
+      {project.title === "Sun Devils" ? (
+        <Image
+          src={project.imageUrl}
+          alt={project.title}
+          width={600}
+          height={400}
+          data-ai-hint={project.imageHint}
+          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <iframe
+          src={project.liveUrl}
+          title={project.title}
+          width="100%"
+          height="400px"
+          className="w-full object-cover transition-transform duration-500 group-hover:scale-105 border-none"
+        />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
     </div>
     <div className={`space-y-6 ${index % 2 !== 0 ? 'md:col-start-1' : ''}`}>

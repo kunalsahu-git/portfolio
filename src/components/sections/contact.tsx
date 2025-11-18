@@ -4,7 +4,7 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { Loader2, Send, Mail, Phone, MapPin } from "lucide-react";
+import { Loader2, Send, Mail, Phone, MapPin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -80,7 +80,7 @@ export function ContactSection() {
                 </div>
                 <div>
                     <p className="font-bold text-lg">Email</p>
-                    <a href="mailto:me@kunal.com" className="text-muted-foreground hover:text-primary transition-colors">me@kunal.com</a>
+                    <a href="mailto:kunalsahumail@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">kunalsahumail@gmail.com</a>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 rounded-lg bg-card border">
@@ -89,7 +89,7 @@ export function ContactSection() {
                 </div>
                 <div>
                     <p className="font-bold text-lg">Phone</p>
-                    <a href="tel:+11234567890" className="text-muted-foreground hover:text-primary transition-colors">+1 1234567890</a>
+                    <a href="tel:+917975518496" className="text-muted-foreground hover:text-primary transition-colors">+91 7975518496</a>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 rounded-lg bg-card border">
@@ -98,8 +98,15 @@ export function ContactSection() {
                 </div>
                  <div>
                     <p className="font-bold text-lg">Location</p>
-                    <p className="text-muted-foreground">123 Street Ave, Silicon Valley, India</p>
+                    <p className="text-muted-foreground">Electronic city, Bangalore, India</p>
                 </div>
+              </div>
+              <div className="p-4 rounded-lg">
+                <Button asChild size="default">
+                  <a href="/resume.pdf" download>
+                    <Download className="mr-2 h-5 w-5" /> Download Resume
+                  </a>
+                </Button>
               </div>
          </div>
           <div className="rounded-lg bg-card p-8 shadow-lg border">

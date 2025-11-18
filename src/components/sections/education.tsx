@@ -3,9 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 const education = [
     {
-        degree: "Bachelor of Technology in Computer Science",
-        institution: "Indian Institute of Technology, Bombay",
-        duration: "2020 - 2024",
+        degree: "Master of Business Administration (MBA)",
+        institution: "DDCE Utkal University",
+        duration: "Present",
+        details: "Currently pursuing a Master of Business Administration."
+    },
+    {
+        degree: "Bachelor of computer Application",
+        institution: "IFIM College",
+        duration: "2019 - 2022",
         details: "Relevant Coursework: Data Structures, Algorithms, Operating Systems, Database Management Systems, Artificial Intelligence."
     }
 ];
@@ -21,24 +27,26 @@ export function EducationSection() {
                     </h2>
                 </div>
 
-                <div className="mx-auto mt-16 max-w-4xl">
-                     <Card>
-                        <CardHeader>
-                             <div className="flex items-start justify-between">
-                                <div>
-                                    <CardTitle className="text-xl">{education[0].degree}</CardTitle>
-                                    <p className="font-semibold text-primary">{education[0].institution}</p>
+                <div className="mx-auto mt-16 max-w-4xl grid gap-8">
+                     {education.map((edu, index) => (
+                        <Card key={index}>
+                            <CardHeader>
+                                <div className="flex items-start justify-between">
+                                    <div>
+                                        <CardTitle className="text-xl">{edu.degree}</CardTitle>
+                                        <p className="font-semibold text-primary">{edu.institution}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-muted-foreground text-sm">{edu.duration}</p>
+                                        <GraduationCap className="h-8 w-8 text-primary mt-2 hidden sm:inline-block"/>
+                                    </div>
                                 </div>
-                                 <div className="text-right">
-                                    <p className="text-muted-foreground text-sm">{education[0].duration}</p>
-                                     <GraduationCap className="h-8 w-8 text-primary mt-2 hidden sm:inline-block"/>
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                           <p className="text-muted-foreground">{education[0].details}</p>
-                        </CardContent>
-                    </Card>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-muted-foreground">{edu.details}</p>
+                            </CardContent>
+                        </Card>
+                    ))}
                 </div>
             </div>
         </section>

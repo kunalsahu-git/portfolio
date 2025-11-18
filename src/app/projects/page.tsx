@@ -58,14 +58,28 @@ export default function ProjectsPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.map((project) => (
               <Card key={project.id} className="overflow-hidden transition-shadow hover:shadow-lg">
-                <Image
-                  src={project.imageUrl}
-                  alt={project.title}
-                  width={600}
-                  height={400}
-                  data-ai-hint={project.imageHint}
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {project.title === "Sun Devils" ? (
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    data-ai-hint={project.imageHint}
+                    className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : project.liveUrl && project.liveUrl !== "#" ? (
+                  <iframe
+                    src={project.liveUrl}
+                    title={project.title}
+                    width="100%"
+                    height="250px"
+                    className="w-full object-cover transition-transform duration-500 group-hover:scale-105 border-none"
+                  />
+                ) : (
+                  <div className="w-full h-[250px] bg-muted flex items-center justify-center">
+                    <p className="text-muted-foreground">No live preview available</p>
+                  </div>
+                )}
                 <CardContent className="p-6 space-y-4">
                   <h3 className="text-xl font-bold font-headline">{project.title}</h3>
                   <div className="flex flex-wrap gap-2">

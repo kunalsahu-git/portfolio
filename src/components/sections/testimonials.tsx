@@ -9,26 +9,34 @@ import { Button } from "../ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const testimonials = [
+  
   {
-    name: "Kunal",
-    title: "Project Manager at Google",
+    name: "Sarah Hough",
+    title: "Executive director, digital brand creative, ASU",
     image: "https://placehold.co/100x100.png",
     imageHint: "woman portrait",
-    quote: "Kunal is a proactive and detail-oriented developer. He was instrumental in launching our new feature ahead of schedule. His ability to write clean, efficient code and collaborate with the team was truly impressive. I would highly recommend him.",
+    quote: "I collaborate and work to make the ASU brand shine across digital channels.",
   },
   {
-    name: "John Smith",
-    title: "Lead Engineer at Microsoft",
+    name: "Austin Powell",
+    title: "Project Lead, KET",
     image: "https://placehold.co/100x100.png",
-    imageHint: "man portrait",
-    quote: "Working with Kunal was a pleasure. He has a deep understanding of modern frontend technologies and a great eye for design. He consistently delivered high-quality work and was always willing to go the extra mile to ensure the project's success.",
+    imageHint: "man portrait professional",
+    quote: "Kunal did a fabulous job on our Moodle project. His expertise and efficiency were instrumental in its success. He delivered high-quality work on a tight schedule.",
   },
-    {
-    name: "Emily White",
-    title: "UX Designer at Airbnb",
+  {
+    name: "Jennifer Dura",
+    title: "Project Lead, Kendallhunt",
     image: "https://placehold.co/100x100.png",
     imageHint: "woman portrait professional",
-    quote: "Kunal has a fantastic ability to translate complex design mockups into pixel-perfect, responsive user interfaces. His attention to detail and commitment to accessibility made our collaboration seamless and effective. He's a valuable asset to any team.",
+    quote: "Excellent work on the migration. Kunal handled a complex and critical migration for us with precision and skill. The transition was seamless, and the results exceeded our expectations.",
+  },
+  {
+    name: "Rachana Bandapalle",
+    title: "Engineering Manager, One Origin",
+    image: "https://placehold.co/100x100.png",
+    imageHint: "woman portrait professional",
+    quote: "Kunal is a highly skilled and dedicated engineer. His contributions were invaluable to our team's success.",
   },
 ];
 
@@ -67,14 +75,6 @@ export function TestimonialsSection() {
                                         "{testimonial.quote}"
                                     </p>
                                     <div className="flex flex-col items-center gap-4">
-                                        <Image 
-                                            src={testimonial.image}
-                                            alt={testimonial.name}
-                                            width={80}
-                                            height={80}
-                                            data-ai-hint={testimonial.imageHint}
-                                            className="rounded-full object-cover"
-                                        />
                                         <div>
                                             <p className="font-bold text-lg">{testimonial.name}</p>
                                             <p className="text-muted-foreground">{testimonial.title}</p>
