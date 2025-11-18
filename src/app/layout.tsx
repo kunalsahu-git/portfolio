@@ -21,8 +21,8 @@ const fontHeadline = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Kunal - Front-End Developer",
-  description: "A modern, interactive portfolio for developers.",
+  title: "Kunal Sahu - Drupal & Full-Stack Developer",
+  description: "Experienced Drupal developer building scalable, high-performing web solutions. Let's build something amazing together.",
   icons: {
     icon: '/favicon.svg',
   },
