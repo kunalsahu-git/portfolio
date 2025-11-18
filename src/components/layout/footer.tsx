@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, GitBranch } from "lucide-react";
 import Link from "next/link";
 
 export function Footer() {
@@ -11,14 +11,14 @@ export function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="#" aria-label="Twitter">
-            <Twitter className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
-          </Link>
-          <Link href="#" aria-label="GitHub">
+          <Link href="https://github.com/kunalsahu-git" aria-label="GitHub">
             <Github className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
-          <Link href="#" aria-label="LinkedIn">
+          <Link href="https://www.linkedin.com/in/kunalsahu1/" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
+          </Link>
+          <Link href="https://www.drupal.org/u/kunal_sahu" aria-label="Drupal.org">
+            <GitBranch className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
         </div>
       </div>

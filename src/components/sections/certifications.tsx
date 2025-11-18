@@ -1,19 +1,22 @@
-import { Award } from "lucide-react";
+import { Award, ExternalLink } from "lucide-react";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import Link from "next/link";
 
 const certifications = [
     {
-        name: "Google Cloud Certified - Professional Cloud Developer",
-        issuer: "Google Cloud",
-        date: "Dec 2023",
-        skills: ["GCP", "Docker", "Kubernetes", "CI/CD", "Terraform"],
+        name: "WebOps Certified Developer",
+        issuer: "Pantheon",
+        date: "Sep 2024",
+        skills: ["WebOps", "CI/CD", "Pantheon"],
+        credentialUrl: "https://www.credential.net/0c384279-5e03-4250-93ca-9f3f737df2ec",
     },
     {
-        name: "Certified Kubernetes Application Developer (CKAD)",
-        issuer: "The Linux Foundation",
-        date: "Jun 2023",
-        skills: ["Kubernetes", "Docker", "Helm", "Microservices"],
+        name: "Google Analytics",
+        issuer: "Great Learning",
+        date: "Sep 2024",
+        skills: ["Google Analytics", "Data Analysis", "Marketing"],
     },
 ];
 
@@ -48,6 +51,16 @@ export function CertificationsSection() {
                                         <Badge key={skill} variant="secondary">{skill}</Badge>
                                     ))}
                                 </div>
+                                {cert.credentialUrl && (
+                                    <div className="mt-4">
+                                        <Button asChild variant="outline">
+                                            <Link href={cert.credentialUrl} target="_blank">
+                                                <ExternalLink className="mr-2 h-4 w-4" />
+                                                Show credential
+                                            </Link>
+                                        </Button>
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
                     ))}
