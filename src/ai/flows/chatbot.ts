@@ -56,7 +56,7 @@ const chatbotExecutionFlow = ai.defineFlow(
 
     } catch (error: any) {
         console.error('[chatbotExecutionFlow] An error occurred during AI generation:', error);
-        return `I'm sorry, an error occurred. Details: ${error.message || 'No further details available.'}`;
+        return `I'm sorry, an error occurred. Details: ${error.message || 'N/A'}. History that caused error: ${JSON.stringify(input.history)}`;
     }
   }
 );
