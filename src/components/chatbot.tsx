@@ -31,7 +31,7 @@ export function Chatbot() {
   const [isPending, startTransition] = useTransition();
   const [factIndex, setFactIndex] = useState(0);
   const [ellipsis, setEllipsis] = useState("");
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const lastMessageRef = useRef<HTMLDivElement>(null);
 
   const funFacts = [
     "Did you know Kunal has worked on Google Search and the Microsoft Azure portal?",
@@ -41,18 +41,10 @@ export function Chatbot() {
     "Thinking of a good question to ask... How about his projects?",
   ];
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(scrollToBottom, 100);
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [isOpen]);
-
-  useEffect(() => {
-    scrollToBottom();
   }, [messages]);
 
   // Effect to cycle through fun facts while loading
@@ -163,51 +155,55 @@ export function Chatbot() {
           <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
             <ScrollArea className="flex-1 p-4 min-h-0 h-full">
               <div className="space-y-4">
-                {messages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={cn(
-                      "flex w-full items-start gap-3",
-                      msg.role === 'user' ? "justify-end" : "justify-start"
-                    )}
-                  >
-                    {msg.role === 'model' && (
-                       <Avatar className="w-8 h-8">
-                         <AvatarFallback><Bot /></AvatarFallback>
-                      </Avatar>
-                    )}
+                {messages.map((msg, index) => {
+                  const isLastMessage = index === messages.length - 1;
+                  return (
                     <div
+                      key={index}
+                      ref={isLastMessage ? lastMessageRef : null}
                       className={cn(
-                        "rounded-lg px-4 py-2 max-w-[80%]",
-                        msg.role === 'user'
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted"
+                        "flex w-full items-start gap-3",
+                        msg.role === 'user' ? "justify-end" : "justify-start"
                       )}
                     >
-                      {msg.role === 'model' ? (
-                        <div className="prose prose-sm max-w-none">
-                          <ReactMarkdown
-                            remarkPlugins={[remarkGfm]}
-                            components={{
-                              strong: ({node, ...props}) => <strong className="font-bold" {...props} />,
-                              ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-1" {...props} />,
-                              li: ({node, ...props}) => <li className="pl-2" {...props} />,
-                            }}
-                          >
-                            {msg.content}
-                          </ReactMarkdown>
-                        </div>
-                      ) : (
-                        <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+                      {msg.role === 'model' && (
+                         <Avatar className="w-8 h-8">
+                           <AvatarFallback><Bot /></AvatarFallback>
+                        </Avatar>
+                      )}
+                      <div
+                        className={cn(
+                          "rounded-lg px-4 py-2 max-w-[80%]",
+                          msg.role === 'user'
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted"
+                        )}
+                      >
+                        {msg.role === 'model' ? (
+                          <div className="prose prose-sm max-w-none">
+                            <ReactMarkdown
+                              remarkPlugins={[remarkGfm]}
+                              components={{
+                                strong: ({node, ...props}) => <strong className="font-bold" {...props} />,
+                                ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-1" {...props} />,
+                                li: ({node, ...props}) => <li className="pl-2" {...props} />,
+                              }}
+                            >
+                              {msg.content}
+                            </ReactMarkdown>
+                          </div>
+                        ) : (
+                          <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+                        )}
+                      </div>
+                       {msg.role === 'user' && (
+                         <Avatar className="w-8 h-8">
+                           <AvatarFallback>You</AvatarFallback>
+                        </Avatar>
                       )}
                     </div>
-                     {msg.role === 'user' && (
-                       <Avatar className="w-8 h-8">
-                         <AvatarFallback>You</AvatarFallback>
-                      </Avatar>
-                    )}
-                  </div>
-                ))}
+                  );
+                })}
                 {isPending && messages[messages.length -1]?.role === 'user' && (
                    <div className="flex items-start gap-3 justify-start animate-pulse">
                         <Avatar className="w-8 h-8">
@@ -219,7 +215,6 @@ export function Chatbot() {
                         </div>
                     </div>
                 )}
-                <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
             
