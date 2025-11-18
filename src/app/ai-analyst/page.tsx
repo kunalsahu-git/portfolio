@@ -14,9 +14,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 
 const developerSkills = [
-  "React", "Next.js", "TypeScript", "JavaScript (ES6+)",
-  "HTML5", "CSS3", "Tailwind CSS", "ShadCN UI",
-  "Git", "GitHub", "Figma", "Adobe XD", "Firebase", "Node.js", "Genkit"
+  "Drupal Development", "Drupal Migration", "React Integration", "Database Management",
+  "Performance Optimization", "API Development", "AWS Cloud Services", "Frontend Development",
+  "Problem-Solving", "Team Collaboration", "Time Management", "Moodle & Wordpress Development",
+  "React", "Next.js", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", 
+  "Tailwind CSS", "ShadCN UI", "Git", "GitHub", "Firebase", "Node.js", "Genkit"
 ];
 
 const JdAnalysisResult = ({ result }: { result: Extract<AnalysisOutput, { analysisType: 'jd' }> }) => (

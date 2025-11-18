@@ -19,9 +19,9 @@ type Message = {
 };
 
 const suggestedQuestions = [
-    "Tell me about his skills",
+    "What is his recent work experience?",
     "What projects has he worked on?",
-    "What's his work experience?",
+    "What is his educational background?",
 ];
 
 export function Chatbot() {
@@ -29,34 +29,14 @@ export function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
-  const [factIndex, setFactIndex] = useState(0);
   const [ellipsis, setEllipsis] = useState("");
   const lastMessageRef = useRef<HTMLDivElement>(null);
-
-  const funFacts = [
-    "Did you know Kunal has worked on Google Search and the Microsoft Azure portal?",
-    "Kunal is a graduate from the prestigious IIT Bombay.",
-    "This AI assistant is one of Kunal's own projects!",
-    "Kunal has experience with both frontend and backend technologies.",
-    "Thinking of a good question to ask... How about his projects?",
-  ];
 
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [messages]);
-
-  // Effect to cycle through fun facts while loading
-  useEffect(() => {
-    if (isPending) {
-      const interval = setInterval(() => {
-        setFactIndex(prevIndex => (prevIndex + 1) % funFacts.length);
-      }, 5000); // Change fact every 5 seconds
-
-      return () => clearInterval(interval);
-    }
-  }, [isPending, funFacts.length]);
 
   // Effect for ellipsis animation
   useEffect(() => {
@@ -108,9 +88,6 @@ export function Chatbot() {
       }, 500);
       return;
     }
-
-    // Set a random starting fun fact
-    setFactIndex(Math.floor(Math.random() * funFacts.length));
 
     startTransition(async () => {
       const historyForAI = newMessages.filter(
@@ -211,7 +188,6 @@ export function Chatbot() {
                         </Avatar>
                         <div className="rounded-lg px-4 py-2 bg-muted text-sm text-muted-foreground italic">
                             <p>Thinking{ellipsis}</p>
-                            <p className="mt-1 text-xs">{funFacts[factIndex]}</p>
                         </div>
                     </div>
                 )}

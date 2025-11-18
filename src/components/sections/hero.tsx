@@ -8,11 +8,9 @@ import { BrainCircuit, Figma, GitBranch, Github, Linkedin, Twitter } from 'lucid
 import Link from 'next/link';
 
 const socialLinks = [
-  { name: "GitHub", icon: Github, href: "#" },
-  { name: "Twitter", icon: Twitter, href: "#" },
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
-  { name: "Figma", icon: Figma, href: "#" },
-  { name: "GitBranch", icon: GitBranch, href: "#" },
+  { name: "GitHub", icon: Github, href: "https://github.com/kunalsahu-git" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/kunalsahu1/" },
+  { name: "Drupal.org", icon: GitBranch, href: "https://www.drupal.org/u/kunal_sahu" },
 ];
 
 export function HeroSection() {
