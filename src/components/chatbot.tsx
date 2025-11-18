@@ -55,7 +55,11 @@ export function Chatbot() {
     setInput("");
 
     startTransition(async () => {
-      const response = await askChatbot({ history: newMessages });
+      // Filter out the initial greeting message before sending to the AI
+      const historyForAI = newMessages.filter(
+        (msg) => msg.content !== "Hi! I'm Kunal's AI assistant. How can I help you today? You can ask me about his skills, projects, or experience."
+      );
+      const response = await askChatbot({ history: historyForAI });
       setMessages(prev => [...prev, { role: 'model', content: response.content }]);
     });
   };

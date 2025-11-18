@@ -54,9 +54,9 @@ const chatbotExecutionFlow = ai.defineFlow(
       
       return responseText;
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('[chatbotExecutionFlow] An error occurred during AI generation:', error);
-        return `I'm sorry, an error occurred. Details: ${error.message || 'No further details available.'}`;
+        return "I'm sorry, I encountered an error. Please try again later.";
     }
   }
 );
